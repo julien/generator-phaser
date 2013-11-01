@@ -1,14 +1,17 @@
 (function () {
   'use strict'; 
 
-  var game, img;
+  var game, 
+    img, 
+    width = document.body.clientWidth,
+    height = document.body.clientHeight;
 
   function preload() {
     game.load.image('example', 'assets/example.png');
   }
 
   function create() {
-    img = game.add.sprite(400, 300, 'example');
+    img = game.add.sprite(width / 2, height / 2, 'example');
     img.anchor = new Phaser.Point(0.5, 0.5);
   }
 
@@ -16,7 +19,7 @@
     img.rotation += 0.05;
   }
 
-  game = new Phaser.Game(800, 600, Phaser.CANVAS, 'phaser-example', {
+  game = new Phaser.Game(width, height, Phaser.CANVAS, 'phaser-example', {
     preload: preload,
     create: create,
     update: update
