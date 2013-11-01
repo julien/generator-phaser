@@ -1,5 +1,4 @@
 (function () {
-  'use strict'; 
 
   var game, 
     img, 
@@ -19,10 +18,11 @@
     img.rotation += 0.05;
   }
 
-  game = new Phaser.Game(width, height, Phaser.CANVAS, 'phaser-example', {
+  game = new Phaser.Game(width, height, Phaser.WEBGL, 'phaser-example', {
     preload: preload,
     create: create,
     update: update
   });
+
 }());
 
