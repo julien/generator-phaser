@@ -8,7 +8,7 @@
   }
 
   function create() {
-    img = game.add.sprite(400 - (128 / 2), 300 - (128 / 2), 'example');
+    img = game.add.sprite(400, 300, 'example');
     img.anchor = new Phaser.Point(0.5, 0.5);
   }
 
