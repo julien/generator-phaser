@@ -1,0 +1,22 @@
+{
+  "name": "gameplate",
+  "version": "0.0.1",
+  "description": "a boilerplate to build games with phaser.js",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/julien/gameplate.git"
+  },
+  "keywords": [
+    "boilerplate",
+    "phaser"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/julien/gameplate/issues"
+  }
+}

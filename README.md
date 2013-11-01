@@ -1,4 +1,5 @@
-gameplate
+Gameplate
 =========
 
-a template for builing games with phaser.js
+A template for builing games with phaser.js.
+
