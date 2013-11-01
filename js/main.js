@@ -1,7 +1,7 @@
 (function () {
 
-  var game, 
-    img, 
+  var game,
+    img,
     width = document.body.clientWidth,
     height = document.body.clientHeight;
 
@@ -12,6 +12,12 @@
   function create() {
     img = game.add.sprite(width / 2, height / 2, 'example');
     img.anchor = new Phaser.Point(0.5, 0.5);
+
+    game.stage.scaleMode = Phaser.StageScaleMode.SHOW_ALL;
+    game.stage.scale.setShowAll();
+    window.addEventListener('resize', function () {
+      game.stage.scale.refresh();
+    });
   }
 
   function update() {
