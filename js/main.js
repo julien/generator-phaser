@@ -5,13 +5,6 @@
     width = document.body.clientWidth,
     height = document.body.clientHeight;
 
-  function getMousePos(e) {
-    var rect = canvas.getBoundingClientRect();
-
-    mouse.x = evt.clientX - rect.left,
-    mouse.y =  evt.clientY - rect.top;
-  }
-
   function preload() {
     game.load.image('example', 'assets/example.png');
   }
@@ -52,5 +45,7 @@
     create: create,
     update: update
   });
+
+  window.game = game; // just for debugging
 }());
 
