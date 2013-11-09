@@ -110,5 +110,5 @@ module.exports = ->
   @loadNpmTasks 'grunt-express'
 
 
-  @registerTask 'server', ['express', 'watch']
+  @registerTask 'server', ['grunt', 'express', 'watch']
   @registerTask 'default', ['clean', 'jshint', 'uglify', 'cssmin', 'processhtml', 'htmlmin', 'copy']
