@@ -108,9 +108,10 @@ module.exports = ->
   @loadNpmTasks 'grunt-contrib-uglify'
   @loadNpmTasks 'grunt-contrib-cssmin'
   @loadNpmTasks 'grunt-contrib-htmlmin'
-  @loadNpmTasks 'grunt-contrib-imagemin'
   @loadNpmTasks 'grunt-contrib-watch'
   @loadNpmTasks 'grunt-processhtml'
+  @loadNpmTasks 'grunt-express'
+  @loadNpmTasks 'grunt-open'
 
 
   @registerTask 'server', ['express', 'open', 'watch']
