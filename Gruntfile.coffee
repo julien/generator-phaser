@@ -85,9 +85,10 @@ module.exports = ->
     express:
       all:
         options:
-          port: 9000,
-          hostname: '0.0.0.0',
-          bases: ['.']
+          port: 9000
+          hostname: '0.0.0.0'
+          bases: ['dist']
+          open: true
           livereload: true
 
     open:
@@ -99,8 +100,8 @@ module.exports = ->
         livereload: true
 
       js:
-        files: ['<%= JS_DIR %>/**/*.js', '!<%= JS_LIBS_DIR %>**/*.js']
-        tasks: ['jshint']
+        files: ['<%= JS_DIR %>**/*.js', '!<%= JS_LIBS_DIR %>**/*.js']
+        tasks: ['jshint', 'uglify']
 
   @loadNpmTasks 'grunt-contrib-copy'
   @loadNpmTasks 'grunt-contrib-clean'
@@ -111,7 +112,9 @@ module.exports = ->
   @loadNpmTasks 'grunt-contrib-imagemin'
   @loadNpmTasks 'grunt-contrib-watch'
   @loadNpmTasks 'grunt-processhtml'
+  @loadNpmTasks 'grunt-express'
+  @loadNpmTasks 'grunt-open'
 
 
-  @registerTask 'server', ['express', 'open', 'watch']
+  @registerTask 'server', ['express', 'watch']
   @registerTask 'default', ['clean', 'jshint', 'uglify', 'cssmin', 'processhtml', 'htmlmin', 'copy']
