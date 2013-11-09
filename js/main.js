@@ -1,107 +1,43 @@
 (function () {
+
   var game,
-    width = 240,
-    height = 320, 
-    player,
-    ball,
-    ballSpeed = 300,
-    ballReleased = 0,
-    cpu,
-    cpuSpeed = 190;
+    img,
+    width = document.body.clientWidth,
+    height = document.body.clientHeight;
 
-  function createPaddle(x, y) {
-    var p = game.add.sprite(x, y, 'paddle');
-    p.anchor.setTo(.5, .5);
-    p.body.collidWorldsBounds = true;
-    p.body.bounce.setTo(1, 1);
-    p.body.immovable = true;
-    return p;
-  }
-
-  function releaseBall() {
-    if (!ballReleased) {
-      ball.body.velocity.x = ballSpeed;
-      ball.body.velocity.y = -ballSpeed;
-      ballReleased = 1;
-    }
-  }
-
-  function handleCollision(ball, paddle) {
-    var diff = 0;
-    if (ball.x < paddle.x) {
-      diff = paddle.x - ball.x;
-      ball.body.velocity.x = -10 * diff;
-    } else if (ball.x > paddle.x) {
-      diff = ball.x - paddle.x;
-      ball.body.velocity.x = 10 * diff;
-    } else {
-      ball.body.velocity.x = 2 + Math.random() * 8;
-    }
-  }
-  
-  function resetBall() {
-    if (ballReleased) {
-      ball.x = game.world.centerX;
-      ball.y = game.world.centerY;
-      ball.body.velocity.x = 0;
-      ball.body.velocity.y = 0;
-      ballReleased = 0;
-    }      
-  }
-
-  function checkBounds() {
-    var top = ball.height / 2, 
-      bottom = game.world.height - (ball.height / 2);
-    
-    if (ball.y < top || ball.y > bottom) {
-      resetBall();
-    }
-  }
-  
-  // phaser specific functions
-  function preload () {
-    game.load.image('paddle', 'assets/phaser-pong-paddle.png');
-    game.load.image('ball', 'assets/phaser-pong-ball.png');
-    game.load.image('background', 'assets/phaser-pong-background.jpg');
+  function preload() {
+    game.load.image('example', 'assets/example.png');
   }
 
   function create() {
-    game.add.tileSprite(0, 0, 240, 320, 'background');
+    img = game.add.sprite(width / 2, height / 2, 'example');
+    img.anchor = new Phaser.Point(0.5, 0.5);
 
-    player = createPaddle(game.world.centerX, game.world.height - 20);
-    cpu = createPaddle(game.world.centerX, 20);
-    ball = game.add.sprite(game.world.centerX, game.world.centerY, 'ball');
-    ball.anchor.setTo(0.5, 0.5);
-    ball.body.collideWorldBounds = true;
-    ball.body.bounce.setTo(1, 1);
+    game.stage.scaleMode = Phaser.StageScaleMode.SHOW_ALL;
+    game.stage.scale.setShowAll();
 
-    game.input.onDown.add(releaseBall, this);
+    window.addEventListener('resize', function () {
+      game.stage.scale.refresh();
+    }, false);
   }
 
   function update() {
-    var width = player.width / 2;
-    
-    player.x = game.input.x;
+    var x, y, cx, cy, dx, dy, angle, scale;
 
-    if (player.x < width) {
-      player.x = width;
-    } else if (player.x > game.width - width) {
-      player.x = game.width - width;
-    }
+    x = game.input.position.x;
+    y = game.input.position.y;
+    cx = game.world.centerX;
+    cy = game.world.centerY;
 
-    if (cpu.x - ball.x < -15) {
-      cpu.body.velocity.x = cpuSpeed; 
-    } else if (cpu.x - ball.x > 15) {
-      cpu.body.velocity.x = -cpuSpeed;
-    } else {
-      cpu.body.velocity.x = 0;
-    }
+    angle = Math.atan2(y - cy, x - cx) * (180 / Math.PI);
+    img.angle = angle;
 
-    // collision detection
-    game.physics.collide(ball, player, handleCollision, null, this);
-    game.physics.collide(ball, cpu, handleCollision, null, this);
+    dx = x - cx;
+    dy = y - cy;
+    scale = Math.sqrt(dx * dx + dy * dy) / 100;
 
-    checkBounds();
+    img.scale.x = scale * 0.6;
+    img.scale.y = scale * 0.6;
   }
 
   game = new Phaser.Game(width, height, Phaser.WEBGL, 'phaser-example', {
