@@ -87,13 +87,14 @@ module.exports = ->
         files:
           '<%= DIST_DIR %><%= INDEX_FILE %>': '<%= INDEX_FILE %>'
 
-    express:
-      all:
+    connect:
+      server:
         options:
           port: 9000
-          bases: ['dev/']
-          open: true
+          base: 'dev'
           livereload: true
+          open: true
+
 
     watch:
       options:
@@ -112,8 +113,7 @@ module.exports = ->
   @loadNpmTasks 'grunt-contrib-imagemin'
   @loadNpmTasks 'grunt-contrib-watch'
   @loadNpmTasks 'grunt-processhtml'
-  @loadNpmTasks 'grunt-express'
+  @loadNpmTasks 'grunt-contrib-connect'
 
-
-  @registerTask 'server', ['copy:build', 'express', 'watch']
+  @registerTask 'server', ['copy:build', 'connect:server', 'watch']
   @registerTask 'default', ['clean', 'jshint', 'uglify', 'cssmin', 'processhtml', 'htmlmin', 'copy']

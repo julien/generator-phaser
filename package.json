@@ -30,7 +30,7 @@
     "grunt-contrib-imagemin": "0.3.0",
     "grunt-contrib-watch": "0.5.3",
     "grunt-processhtml": "0.2.3",
-    "grunt-express": "1.2.1",
+    "grunt-contrib-connect": "*",
     "grunt-open": "0.2.2"
   }
 }

@@ -12,6 +12,10 @@
   "quotmark": "single",
   "undef": true,
   "unused": true,
+  "devel": true,
   "trailing": true,
   "browser": true
+  "globals": {
+    "Phaser": true
+  }
 }
