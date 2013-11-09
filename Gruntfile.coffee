@@ -7,6 +7,7 @@ module.exports = ->
     CSS_DIR: 'css/'
     IMG_DIR: 'img/'
     DIST_DIR: 'dist/'
+    DEV_DIR: 'dev/'
     DIST_FILE: '<%= DIST_DIR %><%= PKG.name %>'
     INDEX_FILE: 'index.html'
     PKG: @file.readJSON 'package.json'
@@ -18,6 +19,12 @@ module.exports = ->
       dist: ['<%= DIST_DIR %>']
 
     copy:
+      build:
+        files: [
+          src: ['<%= JS_DIR %>**', 'index.html', '<%= CSS_DIR %>**', '<%= ASSETS_DIR %>**']
+          expand: true
+          dest: '<%= DEV_DIR %>'
+        ]
       assets:
         files: [
           src: ['<%= ASSETS_DIR %>**']
@@ -86,7 +93,7 @@ module.exports = ->
       all:
         options:
           port: 9000
-          bases: ['dist/']
+          bases: ['dev/']
           open: true
           livereload: true
 
@@ -96,7 +103,7 @@ module.exports = ->
 
       js:
         files: ['<%= JS_DIR %>**/*.js', '!<%= JS_LIBS_DIR %>**/*.js']
-        tasks: ['jshint', 'uglify']
+        tasks: ['jshint', 'build']
 
   @loadNpmTasks 'grunt-contrib-copy'
   @loadNpmTasks 'grunt-contrib-clean'
@@ -110,5 +117,5 @@ module.exports = ->
   @loadNpmTasks 'grunt-express'
 
 
-  @registerTask 'server', ['default', 'express', 'watch']
+  @registerTask 'server', ['copy:build', 'express', 'watch']
   @registerTask 'default', ['clean', 'jshint', 'uglify', 'cssmin', 'processhtml', 'htmlmin', 'copy']
