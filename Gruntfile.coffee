@@ -49,13 +49,11 @@ module.exports = ->
 
       options:
         banner: '/*! <%= PKG.name %> v<%= PKG.version %> */\n'
-        sourceMap: '<%= DIST_FILE %>.sourcemap.js'
 
     cssmin:
       dist:
         files:
           '<%= DIST_FILE %>.min.css': ['<%= CSS_DIR %>main.css']
-
 
     htmlmin:
       options:
@@ -103,7 +101,7 @@ module.exports = ->
 
       js:
         files: ['<%= JS_DIR %>**/*.js', '!<%= JS_LIBS_DIR %>**/*.js']
-        tasks: ['jshint', 'build']
+        tasks: ['jshint', 'copy:build']
 
   @loadNpmTasks 'grunt-contrib-copy'
   @loadNpmTasks 'grunt-contrib-clean'
