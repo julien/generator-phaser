@@ -14,7 +14,8 @@
   "unused": true,
   "devel": true,
   "trailing": true,
-  "browser": true
+  "browser": true,
+  "debug": true,
   "globals": {
     "Phaser": true
   }
