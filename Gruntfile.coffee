@@ -1,6 +1,7 @@
-module.exports = ->
+module.exports = (grunt) ->
 
   @initConfig
+    APP_ID: null
     JS_DIR: 'js/'
     JS_LIBS_DIR: '<%= JS_DIR %>lib/'
     ASSETS_DIR: 'assets/'
@@ -25,11 +26,21 @@ module.exports = ->
           expand: true
           dest: '<%= DEV_DIR %>'
         ]
+
       assets:
         files: [
           src: ['<%= ASSETS_DIR %>**']
           expand: true
           dest: '<%= DIST_DIR %>'
+        ]
+
+      project:
+        files: [
+            src: '.project'
+            dest: '<%= DIST_DIR %>'
+          ,
+            src: 'config.xml'
+            dest: '<%= DIST_DIR %>'
         ]
 
     jshint:
@@ -103,6 +114,50 @@ module.exports = ->
         files: ['<%= JS_DIR %>**/*.js', '!<%= JS_LIBS_DIR %>**/*.js']
         tasks: ['jshint', 'copy:build']
 
+    shell:
+      package:
+        command: 'webtizen -p --nocheck <%= DIST_DIR %>MonsterDosis.wgt <%= DIST_DIR %>'
+
+      install:
+        command: 'webtizen -i -w <%= DIST_DIR %>MonsterDosis.wgt'
+
+      getid:
+        command: 'webtizen -l'
+        options:
+          callback: (err, stdout, stderr, cb) ->
+            return if grunt.config.get 'APP_ID'
+            lines = stdout.split(/\n/).slice(3, -2)
+            ids = lines.map (l) ->
+              return l.split(/\s+/).slice(-1)[0]
+
+            apps = {}
+            for i in ids
+              meta = i.split(/\./)
+              apps[meta[1]] = meta[0]
+
+            appname = (grunt.config.get 'PKG').name
+            appid = apps[appname]
+            grunt.config.set 'APP_ID', appid
+            cb()
+
+      launch:
+        command: ->
+          appid = grunt.config.get 'APP_ID'
+          if appid
+            "webtizen -r -i #{appid}"
+
+      uninstall:
+        command: ->
+          appid = grunt.config.get 'APP_ID'
+          if appid
+            "webtizen -u -i #{appid}"
+
+      debug:
+        command: ->
+          appid = grunt.config.get 'APP_ID'
+          if appid
+            "webtizen -d -i #{appid}"
+
   @loadNpmTasks 'grunt-contrib-copy'
   @loadNpmTasks 'grunt-contrib-clean'
   @loadNpmTasks 'grunt-contrib-jshint'
@@ -113,7 +168,11 @@ module.exports = ->
   @loadNpmTasks 'grunt-contrib-watch'
   @loadNpmTasks 'grunt-processhtml'
   @loadNpmTasks 'grunt-express'
+  @loadNpmTasks 'grunt-shell'
 
 
   @registerTask 'server', ['copy:build', 'express', 'watch']
+
+  @registerTask 'deploy', ['default', 'shell:package', 'shell:install', 'shell:getid', 'shell:launch']
+
   @registerTask 'default', ['clean', 'jshint', 'uglify', 'cssmin', 'processhtml', 'htmlmin', 'copy']
