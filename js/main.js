@@ -13,10 +13,14 @@
     img = game.add.sprite(width / 2, height / 2, 'example');
     img.anchor = new Phaser.Point(0.5, 0.5);
 
-    game.stage.scaleMode = Phaser.StageScaleMode.SHOW_ALL;
-    game.stage.scale.setShowAll();
+    game.stage.scaleMode = Phaser.StageScaleMode.EXACT_FIT;
 
+    // Not sure if this is the best way to do it ...  
     window.addEventListener('resize', function () {
+      width = document.body.clientWidth;
+      height = document.body.clientHeight;
+      game.width = width;
+      game.height = height;
       game.stage.scale.refresh();
     }, false);
   }
