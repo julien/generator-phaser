@@ -1,7 +1,9 @@
 module.exports = (grunt) ->
 
   @initConfig
+    PKG: @file.readJSON 'package.json'
     APP_ID: null
+    APP_NAME: '<%= PKG.name %>'
     JS_DIR: 'js/'
     JS_LIBS_DIR: '<%= JS_DIR %>lib/'
     ASSETS_DIR: 'assets/'
@@ -11,7 +13,6 @@ module.exports = (grunt) ->
     DEV_DIR: 'dev/'
     DIST_FILE: '<%= DIST_DIR %><%= PKG.name %>'
     INDEX_FILE: 'index.html'
-    PKG: @file.readJSON 'package.json'
 
     clean:
       options:
@@ -135,16 +136,19 @@ module.exports = (grunt) ->
               meta = i.split(/\./)
               apps[meta[1]] = meta[0]
 
-            appname = (grunt.config.get 'PKG').name
+            console.log ('APP')
+            appname = grunt.config.get 'APP_NAME'
             appid = apps[appname]
             grunt.config.set 'APP_ID', appid
             cb()
 
       launch:
         command: ->
+          appname = grunt.config.get 'APP_NAME'
+          console.log appname
           appid = grunt.config.get 'APP_ID'
           if appid
-            "webtizen -r -i #{appid}"
+            "webtizen -r -i #{appid}.#{appname}"
 
       uninstall:
         command: ->
