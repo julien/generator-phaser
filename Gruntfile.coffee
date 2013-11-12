@@ -19,16 +19,10 @@ module.exports = (grunt) ->
         force: true
 
       dist: ['<%= DIST_DIR %>']
+      dev: ['<%= DEV_DIR %>']
 
     copy:
-      build:
-        files: [
-          src: ['<%= JS_DIR %>**', 'index.html', '<%= CSS_DIR %>**', '<%= ASSETS_DIR %>**']
-          expand: true
-          dest: '<%= DEV_DIR %>'
-        ]
-
-      assets:
+      distassets:
         files: [
           src: ['<%= ASSETS_DIR %>**']
           expand: true
@@ -42,6 +36,33 @@ module.exports = (grunt) ->
           ,
             src: 'config.xml'
             dest: '<%= DIST_DIR %>'
+        ]
+
+      devindex:
+        files: [
+          src: ['index.html']
+          dest: '<%= DEV_DIR %>'
+        ]
+
+      devjs:
+        files: [
+          src: ['<%= JS_DIR %>**']
+          expand: true
+          dest: '<%= DEV_DIR %>'
+        ]
+
+      devcss:
+        files: [
+          src: ['<%= CSS_DIR %>**']
+          expand: true
+          dest: '<%= DEV_DIR %>'
+        ]
+
+      devassets:
+        files: [
+          src: ['<%= ASSETS_DIR %>**']
+          expand: true
+          dest: '<%= DEV_DIR %>'
         ]
 
     jshint:
@@ -99,14 +120,13 @@ module.exports = (grunt) ->
         files:
           '<%= DIST_DIR %><%= INDEX_FILE %>': '<%= INDEX_FILE %>'
 
-    connect:
-      server:
+    express:
+      all:
         options:
           port: 9000
-          base: 'dev'
-          livereload: true
+          bases: ['dev/']
           open: true
-
+          livereload: true
 
     watch:
       options:
@@ -114,7 +134,7 @@ module.exports = (grunt) ->
 
       js:
         files: ['<%= JS_DIR %>**/*.js', '!<%= JS_LIBS_DIR %>**/*.js']
-        tasks: ['jshint', 'copy:build']
+        tasks: ['copy:devjs']
 
     shell:
       package:
@@ -128,6 +148,11 @@ module.exports = (grunt) ->
         options:
           callback: (err, stdout, stderr, cb) ->
             return if grunt.config.get 'APP_ID'
+
+            if (stdout.match('Failed'))
+              grunt.log.warn 'Check that your device is connected.'
+              grunt.fail.fatal stdout
+
             lines = stdout.split(/\n/).slice(3, -2)
             ids = lines.map (l) ->
               return l.split(/\s+/).slice(-1)[0]
@@ -137,7 +162,6 @@ module.exports = (grunt) ->
               meta = i.split(/\./)
               apps[meta[1]] = meta[0]
 
-            console.log ('APP')
             appname = grunt.config.get 'APP_NAME'
             appid = apps[appname]
             grunt.config.set 'APP_ID', appid
@@ -145,21 +169,25 @@ module.exports = (grunt) ->
 
       launch:
         command: ->
-          appname = grunt.config.get 'APP_NAME'
-          console.log appname
           appid = grunt.config.get 'APP_ID'
+
+          if (!appid)
+            return grunt.task.clearQueue().run(['shell:getid', 'shell:launch'])
+
+          appname = @config.get 'APP_NAME'
+
           if appid
             "webtizen -r -i #{appid}.#{appname}"
 
       uninstall:
         command: ->
-          appid = grunt.config.get 'APP_ID'
+          appid = @config.get 'APP_ID'
           if appid
             "webtizen -u -i #{appid}"
 
       debug:
         command: ->
-          appid = grunt.config.get 'APP_ID'
+          appid = @config.get 'APP_ID'
           if appid
             "webtizen -d -i #{appid}"
 
@@ -172,10 +200,16 @@ module.exports = (grunt) ->
   @loadNpmTasks 'grunt-contrib-imagemin'
   @loadNpmTasks 'grunt-contrib-watch'
   @loadNpmTasks 'grunt-processhtml'
-  @loadNpmTasks 'grunt-contrib-connect'
+  @loadNpmTasks 'grunt-express'
+  @loadNpmTasks 'grunt-shell'
 
-  @registerTask 'deploy', ['default', 'shell:package', 'shell:install', 'shell:getid', 'shell:launch']
 
-  @registerTask 'server', ['copy:build', 'connect:server', 'watch']
+  @registerTask 'dev', ['clean:dev', 'copy:devindex', 'copy:devjs', 'copy:devcss', 'copy:devassets']
 
-  @registerTask 'default', ['clean', 'jshint', 'uglify', 'cssmin', 'processhtml', 'htmlmin', 'copy']
+  @registerTask 'server', ['dev', 'express', 'watch']
+
+  @registerTask 'deploy', ['dist', 'shell:package', 'shell:install', 'shell:getid', 'shell:launch']
+
+  @registerTask 'dist', ['clean:dist', 'jshint', 'uglify', 'cssmin', 'processhtml', 'htmlmin', 'copy:distassets', 'copy:project']
+
+  @registerTask 'default', ['dist']
