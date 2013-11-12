@@ -1,14 +1,14 @@
 {
-  "name": "gameplate",
+  "name": "MonsterDosis",
   "version": "0.0.1",
-  "description": "a boilerplate to build games with phaser.js",
+  "description": "kill the monsters!",
   "main": "Gruntfile.js",
   "scripts": {
     "test": "grunt test"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/julien/gameplate.git"
+    "url": "git://github.com/dciccale/phasergames.git"
   },
   "keywords": [
     "boilerplate",
@@ -17,7 +17,7 @@
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/julien/gameplate/issues"
+    "url": "https://github.com/dciccale/phasergames/issues"
   },
   "devDependencies": {
     "grunt": "0.4.1",
@@ -30,7 +30,7 @@
     "grunt-contrib-imagemin": "0.3.0",
     "grunt-contrib-watch": "0.5.3",
     "grunt-processhtml": "0.2.3",
-    "grunt-contrib-connect": "*",
-    "grunt-open": "0.2.2"
+    "grunt-express": "1.2.1",
+    "grunt-shell": "0.5.0"
   }
 }
