@@ -2,67 +2,35 @@ module.exports = (grunt) ->
 
   @initConfig
     PKG: @file.readJSON 'package.json'
-    APP_ID: null
     APP_NAME: '<%= PKG.name %>'
-    JS_DIR: 'js/'
-    JS_LIBS_DIR: '<%= JS_DIR %>lib/'
-    ASSETS_DIR: 'assets/'
-    CSS_DIR: 'css/'
-    IMG_DIR: 'img/'
-    DIST_DIR: 'dist/'
-    DEV_DIR: 'dev/'
-    DIST_FILE: '<%= DIST_DIR %><%= PKG.name %>'
+    SRC_DIR: 'src'
+    DST_DIR: 'dist'
+    DST_FILE:  '<%= DST_DIR %>/<%= PKG.name %>'
     INDEX_FILE: 'index.html'
 
     clean:
       options:
         force: true
 
-      dist: ['<%= DIST_DIR %>']
-      dev: ['<%= DEV_DIR %>']
+      dist: ['<%= DST_DIR %>']
 
     copy:
-      distassets:
+      assets:
         files: [
-          src: ['<%= ASSETS_DIR %>**']
           expand: true
-          dest: '<%= DIST_DIR %>'
+          flatten: false
+          cwd: '<%= SRC_DIR %>/assets/'
+          src: ['**']
+          dest: '<%= DST_DIR %>/assets/'
         ]
 
-      project:
+      index:
         files: [
-            src: '.project'
-            dest: '<%= DIST_DIR %>'
-          ,
-            src: 'config.xml'
-            dest: '<%= DIST_DIR %>'
-        ]
+          src: ['<%= SRC_DIR %>/<%= INDEX_FILE %>]']
+          expand: false
+          flatten: true
+          dest: '<%= DST_DIR %>/<%= INDEX_FILE %>'
 
-      devindex:
-        files: [
-          src: ['index.html']
-          dest: '<%= DEV_DIR %>'
-        ]
-
-      devjs:
-        files: [
-          src: ['<%= JS_DIR %>**']
-          expand: true
-          dest: '<%= DEV_DIR %>'
-        ]
-
-      devcss:
-        files: [
-          src: ['<%= CSS_DIR %>**']
-          expand: true
-          dest: '<%= DEV_DIR %>'
-        ]
-
-      devassets:
-        files: [
-          src: ['<%= ASSETS_DIR %>**']
-          expand: true
-          dest: '<%= DEV_DIR %>'
         ]
 
     jshint:
@@ -70,15 +38,13 @@ module.exports = (grunt) ->
         options:
           force: true
           jshintrc: '.jshintrc'
-          ignores: [
-            '<%= JS_LIBS_DIR %>**/*.js'
-          ]
-        src: ['<%= JS_DIR %>**/*.js']
+          ignores: ['<%= SRC_DIR %>/js/lib/**/*.js']
+        src: ['<%= SRC_DIR %>/js/**/*.js']
 
     uglify:
       dist:
         files:
-          '<%= DIST_FILE %>.min.js': ['<%= JS_LIBS_DIR %>**/*.js', '<%= JS_DIR %>main.js']
+          '<%= DST_FILE %>.min.js': ['<%= SRC_DIR %>/js/**/*.js']
 
       options:
         banner: '/*! <%= PKG.name %> v<%= PKG.version %> */\n'
@@ -86,7 +52,7 @@ module.exports = (grunt) ->
     cssmin:
       dist:
         files:
-          '<%= DIST_FILE %>.min.css': ['<%= CSS_DIR %>main.css']
+          '<%= DST_FILE %>.min.css': ['<%= SRC_DIR %>/css/**/*.css']
 
     htmlmin:
       options:
@@ -101,98 +67,38 @@ module.exports = (grunt) ->
 
       index:
         files:
-          '<%= DIST_DIR %><%= INDEX_FILE %>': '<%= DIST_DIR %><%= INDEX_FILE %>'
-
-    imagemin:
-      options:
-        optimizationLevel: 3
-
-      dist:
-        files: [
-          cwd: '<%= CSS_DIR %>'
-          src: ['<%= IMG_DIR %>**']
-          expand: true
-          dest: '<%= DIST_DIR %>'
-        ]
+          '<%= DST_DIR %>/<%= INDEX_FILE %>': '<%= DST_DIR %>/<%= INDEX_FILE %>'
 
     processhtml:
       index:
         files:
-          '<%= DIST_DIR %><%= INDEX_FILE %>': '<%= INDEX_FILE %>'
+          '<%= DST_DIR %>/<%= INDEX_FILE %>': '<%= SRC_DIR %>/<%=INDEX_FILE %>'
 
-    express:
-      all:
+    connect:
+      dev:
         options:
           port: 9000
-          bases: ['dev/']
-          open: true
-          livereload: true
+          base: '<%= SRC_DIR %>/'
 
     watch:
-      options:
-        livereload: true
-
       js:
-        files: ['<%= JS_DIR %>**/*.js', '!<%= JS_LIBS_DIR %>**/*.js']
-        tasks: ['copy:devjs']
-
-    shell:
-      package:
-        command: 'webtizen -p --nocheck <%= DIST_DIR %>MonsterDosis.wgt <%= DIST_DIR %>'
-
-      install:
-        command: 'webtizen -i -w <%= DIST_DIR %>MonsterDosis.wgt'
-
-      getid:
-        command: 'webtizen -l'
+        files: ['<%= SRC_DIR %>js/**/*.js']
+        tasks: ['jshint']
         options:
-          callback: (err, stdout, stderr, cb) ->
-            return if grunt.config.get 'APP_ID'
+          livereload: true
 
-            if (stdout.match('Failed'))
-              grunt.log.warn 'Check that your device is connected.'
-              grunt.fail.fatal stdout
-
-            lines = stdout.split(/\n/).slice(3, -2)
-            ids = lines.map (l) ->
-              return l.split(/\s+/).slice(-1)[0]
-
-            apps = {}
-            for i in ids
-              meta = i.split(/\./)
-              apps[meta[1]] = meta[0]
-
-            appname = grunt.config.get 'APP_NAME'
-            appid = apps[appname]
-            grunt.config.set 'APP_ID', appid
-            cb()
-
-      launch:
-        command: ->
-          appid = grunt.config.get 'APP_ID'
-
-          if (!appid)
-            return grunt.task.clearQueue().run(['shell:getid', 'shell:launch'])
-
-          appname = @config.get 'APP_NAME'
-
-          if appid
-            "webtizen -r -i #{appid}.#{appname}"
-
-      uninstall:
-        command: ->
-          appid = @config.get 'APP_ID'
-          if appid
-            "webtizen -u -i #{appid}"
-
-      debug:
-        command: ->
-          appid = @config.get 'APP_ID'
-          if appid
-            "webtizen -d -i #{appid}"
+      all:
+        files: [
+          '<%= SRC_DIR %>/assets/**/*'
+          '<%= SRC_DIR %>/css/**/*.css'
+          '<%= SRC_DIR %>/index.html'
+        ]
+        options:
+           livereload: true
 
   @loadNpmTasks 'grunt-contrib-copy'
   @loadNpmTasks 'grunt-contrib-clean'
+  @loadNpmTasks 'grunt-contrib-connect'
   @loadNpmTasks 'grunt-contrib-jshint'
   @loadNpmTasks 'grunt-contrib-uglify'
   @loadNpmTasks 'grunt-contrib-cssmin'
@@ -200,16 +106,19 @@ module.exports = (grunt) ->
   @loadNpmTasks 'grunt-contrib-imagemin'
   @loadNpmTasks 'grunt-contrib-watch'
   @loadNpmTasks 'grunt-processhtml'
-  @loadNpmTasks 'grunt-express'
-  @loadNpmTasks 'grunt-shell'
 
 
-  @registerTask 'dev', ['clean:dev', 'copy:devindex', 'copy:devjs', 'copy:devcss', 'copy:devassets']
+  @registerTask 'server',  ['jshint', 'connect', 'watch']
 
-  @registerTask 'server', ['dev', 'express', 'watch']
+  @registerTask 'dist', [
+    'clean',
+    'jshint',
+    'uglify',
+    'cssmin',
+    'copy',
+    'processhtml',
+    'htmlmin'
+  ]
 
-  @registerTask 'deploy', ['dist', 'shell:package', 'shell:install', 'shell:getid', 'shell:launch']
+  @registerTask 'default', ['server']
 
-  @registerTask 'dist', ['clean:dist', 'jshint', 'uglify', 'cssmin', 'processhtml', 'htmlmin', 'copy:distassets', 'copy:project']
-
-  @registerTask 'default', ['dist']
