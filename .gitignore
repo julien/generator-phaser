@@ -1,5 +1,5 @@
-.listing.html
 *.db
-.*.DS_Store
-node_modules/
+.DS_Store
+.listing.html
 dist/
+node_modules/

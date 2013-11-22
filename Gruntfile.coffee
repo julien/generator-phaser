@@ -11,7 +11,6 @@ module.exports = (grunt) ->
     clean:
       options:
         force: true
-
       dist: ['<%= DST_DIR %>']
 
     copy:
@@ -23,7 +22,6 @@ module.exports = (grunt) ->
           src: ['**']
           dest: '<%= DST_DIR %>/assets/'
         ]
-
       index:
         files: [
           src: ['<%= SRC_DIR %>/<%= INDEX_FILE %>]']
@@ -107,18 +105,9 @@ module.exports = (grunt) ->
   @loadNpmTasks 'grunt-contrib-watch'
   @loadNpmTasks 'grunt-processhtml'
 
-
   @registerTask 'server',  ['jshint', 'connect', 'watch']
-
-  @registerTask 'dist', [
-    'clean',
-    'jshint',
-    'uglify',
-    'cssmin',
-    'copy',
-    'processhtml',
-    'htmlmin'
-  ]
-
+  @registerTask 'dist', ['clean', 'jshint', 'uglify', 'cssmin', 'copy', 'processhtml', 'htmlmin']
+  # a task executed by the pre-commit hook (works unix)
+  @registerTask 'precommit', ['clean', 'jshint']
   @registerTask 'default', ['server']
 
