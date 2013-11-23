@@ -48,4 +48,3 @@ A [Yeoman](http://yeoman.io/) generator to generate HTML5 games with [phaser](ht
 
 + [Ben Alman](http://benalman.com/) for [Grunt](http://gruntjs.com/)
 
-
