@@ -101,13 +101,10 @@ module.exports = (grunt) ->
   @loadNpmTasks 'grunt-contrib-uglify'
   @loadNpmTasks 'grunt-contrib-cssmin'
   @loadNpmTasks 'grunt-contrib-htmlmin'
-  @loadNpmTasks 'grunt-contrib-imagemin'
   @loadNpmTasks 'grunt-contrib-watch'
   @loadNpmTasks 'grunt-processhtml'
 
   @registerTask 'server',  ['jshint', 'connect', 'watch']
   @registerTask 'dist', ['clean', 'jshint', 'uglify', 'cssmin', 'copy', 'processhtml', 'htmlmin']
-  # a task executed by the pre-commit hook (works unix)
-  @registerTask 'precommit', ['clean', 'jshint']
   @registerTask 'default', ['server']
 
