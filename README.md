@@ -4,7 +4,7 @@ generator-phaser
 A [Yeoman](http://yeoman.io/) generator to generate HTML5 games 
 with [phaser](http://phaser.io/).
 
-**Instructions**
+**INSTRUCTIONS**
 
 + Install [Node.js](http://www.nodejs.org)
 
@@ -31,12 +31,13 @@ with [phaser](http://phaser.io/).
 **TODO**
 
 + Add Grunt tasks for "mobile" deployment 
-  - see Denis' shell & debug tasks in Gruntfile.coffee for Tizen in previous releases
-  - Add Grunt task for CocoonJS
+  - See Denis' shell & debug tasks in Gruntfile.coffee for Tizen in previous releases
+  - Add Grunt task for [CocoonJS](https://www.ludei.com/cocoonjs/)
+  - Add Grunt task for [Ejecta](https://github.com/phoboslab/Ejecta) (will it blend)?
   
 + Think about a task to update Phaser 
-  - bower/git submodule?  (repo is quite big)
-  - curl? (grap raw phaser.js file from github ...)
+  - bower or git submodule?  (Phaser repo is quite big)
+  - curl? (grab raw phaser.js file from github ...)
 
 
 **CREDITS**
