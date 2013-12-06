@@ -76,11 +76,11 @@ module.exports = (grunt) ->
       dev:
         options:
           port: 9000
-          base: '<%= SRC_DIR %>/'
+          base: '<%= SRC_DIR %>'
 
     watch:
       js:
-        files: ['<%= SRC_DIR %>js/**/*.js']
+        files: ['<%= SRC_DIR %>/js/**/*.js']
         tasks: ['jshint']
         options:
           livereload: true

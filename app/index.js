@@ -41,8 +41,12 @@ PhaserGenerator.prototype.app = function app() {
   this.mkdir('src/js');
   this.mkdir('src/js/lib');
 
-  this.copy('_package.json', 'package.json');
   this.copy('_Gruntfile.coffee', 'Gruntfile.coffee');
+
+  // Wait untill the "official" Phaser is in the Bower registry
+  // this.copy('_bower.json', 'bower.json');
+  
+  this.copy('_package.json', 'package.json');
 
   this.copy('src/assets/example.png', 'src/assets/example.png');
   this.copy('src/css/main.css', 'src/css/main.css');
@@ -53,6 +57,7 @@ PhaserGenerator.prototype.app = function app() {
 };
 
 PhaserGenerator.prototype.projectfiles = function projectfiles() {
-  this.copy('gitignore', '.gitignore');
+  this.copy('bowerrc', '.bowerrc');
   this.copy('jshintrc', '.jshintrc');
+  this.copy('gitignore', '.gitignore');
 };
