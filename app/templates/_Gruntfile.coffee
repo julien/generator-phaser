@@ -8,6 +8,11 @@ module.exports = (grunt) ->
     DST_FILE:  '<%= DST_DIR %>/main'
     INDEX_FILE: 'index.html'
 
+    # For the moment grab latest phaser build
+    # from GH, later on phaser might have Bower support
+    curl:
+      '<%= SRC_DIR %>/js/lib/phaser.js': 'https://raw.github.com/photonstorm/phaser/master/build/phaser.js'
+
     clean:
       options:
         force: true
@@ -102,9 +107,10 @@ module.exports = (grunt) ->
   @loadNpmTasks 'grunt-contrib-cssmin'
   @loadNpmTasks 'grunt-contrib-htmlmin'
   @loadNpmTasks 'grunt-contrib-watch'
+  @loadNpmTasks 'grunt-curl'
   @loadNpmTasks 'grunt-processhtml'
 
   @registerTask 'server',  ['jshint', 'connect', 'watch']
   @registerTask 'dist', ['clean', 'jshint', 'uglify', 'cssmin', 'copy', 'processhtml', 'htmlmin']
-  @registerTask 'default', ['server']
+  @registerTask 'default', ['curl', 'server']
 

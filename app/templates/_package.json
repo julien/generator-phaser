@@ -12,6 +12,7 @@
     "grunt-contrib-cssmin": "*",
     "grunt-contrib-htmlmin": "*",
     "grunt-contrib-watch": "*",
+    "grunt-curl": "*",
     "grunt-processhtml": "*" 
   }
 }
