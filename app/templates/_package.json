@@ -1,6 +1,8 @@
 {
   "name": "<%= projectName %>",
   "version": "0.0.0",
+  "readme": "",
+  "repository": "",
   "dependencies": {},
   "devDependencies": {
     "grunt": "*",
@@ -13,6 +15,7 @@
     "grunt-contrib-htmlmin": "*",
     "grunt-contrib-watch": "*",
     "grunt-curl": "*",
-    "grunt-processhtml": "*" 
+    "grunt-processhtml": "*",
+    "grunt-typescript": "*"
   }
 }

@@ -93,6 +93,10 @@ module.exports = (grunt) ->
         options:
           livereload: true
 
+      ts:
+        files: ['<%= SRC_DIR %>/js/**/*.ts']
+        tasks: ['typescript']
+
       all:
         files: [
           '<%= SRC_DIR %>/assets/**/*'
@@ -101,6 +105,21 @@ module.exports = (grunt) ->
         ]
         options:
            livereload: true
+
+    typescript:
+      main:
+        src: [
+          '<%= SRC_DIR %>/js/*.ts'
+          '!<%= SRC_DIR/js/lib/*.ts %>'
+        ]
+        dest: '<%= SRC_DIR %>/js/main.js'
+        options:
+          module: 'amd'
+          target: 'es5'
+          base_path: '<%= SRC_DIR %>/js/*.ts'
+          sourcemap: true
+          declaration: false
+
 
   @loadNpmTasks 'grunt-contrib-copy'
   @loadNpmTasks 'grunt-contrib-clean'
@@ -112,9 +131,12 @@ module.exports = (grunt) ->
   @loadNpmTasks 'grunt-contrib-watch'
   @loadNpmTasks 'grunt-curl'
   @loadNpmTasks 'grunt-processhtml'
+  @loadNpmTasks 'grunt-typescript'
 
-  @registerTask 'server',  ['jshint', 'connect', 'watch']
   @registerTask 'dist', ['clean', 'jshint', 'uglify', 'cssmin', 'copy', 'processhtml', 'htmlmin']
+  @registerTask 'server',  ['jshint', 'connect', 'watch']
+  @registerTask 'ts', ['connect', 'watch']
   @registerTask 'update', ['curl-dir']
+
   @registerTask 'default', ['server']
 
