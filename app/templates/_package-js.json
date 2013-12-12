@@ -1,5 +1,8 @@
 {
-  "name": "<%= projectName %>",
+  "name": "<%= _.slugify(projectName) %>",
+  "description": "",
+  "readme": "",
+  "repository": "",
   "version": "0.0.0",
   "readme": "",
   "repository": "",
@@ -15,7 +18,6 @@
     "grunt-contrib-htmlmin": "*",
     "grunt-contrib-watch": "*",
     "grunt-curl": "*",
-    "grunt-processhtml": "*",
-    "grunt-typescript": "*"
+    "grunt-processhtml": "*"
   }
 }

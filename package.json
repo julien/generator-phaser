@@ -1,10 +1,11 @@
 {
   "name": "generator-phaser",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A Yeoman generator to generate HTML5 games with phaser.js",
   "keywords": [
     "yeoman-generator",
-    "phaser"
+    "phaser",
+    "typescript"
   ],
   "homepage": "https://github.com/julien/generator-phaser",
   "bugs": "https://github.com/julien/generator-phaser/issues",

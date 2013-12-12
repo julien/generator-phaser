@@ -5,7 +5,6 @@ var util = require('util')
   , yeoman = require('yeoman-generator')
   , PhaserGenerator;
 
-
 PhaserGenerator = module.exports = function PhaserGenerator(args, options, config) {
   yeoman.generators.Base.apply(this, arguments);
 
@@ -54,8 +53,13 @@ PhaserGenerator.prototype.app = function app() {
   // TODO: Find a way to generate a different Gruntfile and package.json
   //       for js and ts projects
   //       templates?
-  this.template('_package.json', 'package.json');
-  this.copy('_Gruntfile.coffee', 'Gruntfile.coffee');
+  if (this.useTypeScript) {
+    this.template('_package-ts.json', 'package.json');
+    this.copy('_Gruntfile-ts.coffee', 'Gruntfile.coffee'); 
+  } else {
+    this.template('_package-js.json', 'package.json');
+    this.copy('_Gruntfile-js.coffee', 'Gruntfile.coffee');
+  }
 };
 
 PhaserGenerator.prototype.projectfiles = function projectfiles() {
@@ -80,7 +84,4 @@ PhaserGenerator.prototype.projectfiles = function projectfiles() {
     this.copy('src/js/main.js', 'src/js/main.js');
   }
 };
-
-
-
 

@@ -13,7 +13,6 @@ module.exports = (grunt) ->
     'curl-dir':
       '<%= SRC_DIR %>/js/lib/': [
         'https://raw.github.com/photonstorm/phaser/master/build/phaser.js'
-        'https://raw.github.com/photonstorm/phaser/master/build/phaser.d.ts'
       ]
 
     clean:
@@ -106,21 +105,6 @@ module.exports = (grunt) ->
         options:
            livereload: true
 
-    typescript:
-      main:
-        src: [
-          '<%= SRC_DIR %>/js/*.ts'
-          '!<%= SRC_DIR/js/lib/*.ts %>'
-        ]
-        dest: '<%= SRC_DIR %>/js/main.js'
-        options:
-          module: 'amd'
-          target: 'es5'
-          base_path: '<%= SRC_DIR %>/js/*.ts'
-          sourcemap: true
-          declaration: false
-
-
   @loadNpmTasks 'grunt-contrib-copy'
   @loadNpmTasks 'grunt-contrib-clean'
   @loadNpmTasks 'grunt-contrib-connect'
@@ -131,12 +115,10 @@ module.exports = (grunt) ->
   @loadNpmTasks 'grunt-contrib-watch'
   @loadNpmTasks 'grunt-curl'
   @loadNpmTasks 'grunt-processhtml'
-  @loadNpmTasks 'grunt-typescript'
 
-  @registerTask 'dist', ['clean', 'jshint', 'uglify', 'cssmin', 'copy', 'processhtml', 'htmlmin']
+  @registerTask 'dist', ['clean', 'jshint', 'uglify',
+                         'cssmin', 'copy', 'processhtml', 'htmlmin']
   @registerTask 'server',  ['jshint', 'connect', 'watch']
-  @registerTask 'ts', ['connect', 'watch']
   @registerTask 'update', ['curl-dir']
-
   @registerTask 'default', ['server']
 
