@@ -18,6 +18,7 @@
   "browser": true,
   "debug": true,
   "globals": {
-    "Phaser": true
+    "Phaser": true,
+    "example": true
   }
 }

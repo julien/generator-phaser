@@ -29,14 +29,7 @@ A [Yeoman](http://yeoman.io/) generator to generate HTML5 games with [phaser](ht
 
 **TODO**
 
-+ Add Grunt tasks for "mobile" deployment 
-  + See Denis' shell & debug tasks in Gruntfile.coffee for Tizen devices in previous releases/commits.
-  + Add Grunt task for [CocoonJS](https://www.ludei.com/cocoonjs/).
-  + Add Grunt task for [Ejecta](https://github.com/phoboslab/Ejecta) (will it blend)?
-  
-+ Think about a task to update Phaser 
-  + bower or git submodule?  (Phaser repo is quite big)
-  + grunt-curl? (grab raw phaser.js file from github ...)
++ Add [Bower](http://bower.io/) specific files once Phaser is in the Bower registry. 
 
 
 **CREDITS**
