@@ -19,5 +19,10 @@
     "grunt-contrib-watch": "*",
     "grunt-curl": "*",
     "grunt-processhtml": "*"
+  },
+
+  "scripts": {
+    "start":   "node -e \"require('grunt').tasks(['server']);\"",
+    "install": "node -e \"require('grunt').tasks(['dist']);\""
   }
 }

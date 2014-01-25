@@ -21,11 +21,11 @@ A [Yeoman](http://yeoman.io/) generator to generate HTML5 games with [phaser](ht
 
 + Run a local development server (livereload enabled) with this command:
 
-  `grunt`
+  `npm start`
 
 + Package your game (i.e. minify css, html and js) with:
 
-  `grunt dist`
+  `npm install`
 
 **TODO**
 
