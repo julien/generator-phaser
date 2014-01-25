@@ -51,11 +51,12 @@ PhaserGenerator.prototype.projectfiles = function projectfiles() {
   this.copy('src/assets/preloader.gif', 'src/assets/preloader.gif');
   this.copy('src/css/main.css', 'src/css/main.css');
   this.copy('src/js/lib/phaser.js', 'src/js/lib/phaser.js');
-  this.copy('src/js/boot.js', 'src/js/boot.js');
-  this.copy('src/js/game.js', 'src/js/game.js');
-  this.copy('src/js/main.js', 'src/js/main.js');
-  this.copy('src/js/menu.js', 'src/js/menu.js');
-  this.copy('src/js/preloader.js', 'src/js/preloader.js');
-  this.copy('src/index.html', 'src/index.html');
+  
+  this.template('src/js/boot.js', 'src/js/boot.js');
+  this.template('src/js/game.js', 'src/js/game.js');
+  this.template('src/js/main.js', 'src/js/main.js');
+  this.template('src/js/menu.js', 'src/js/menu.js');
+  this.template('src/js/preloader.js', 'src/js/preloader.js');
+  this.template('src/index.html', 'src/index.html');
 };
 

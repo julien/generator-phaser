@@ -1,11 +1,12 @@
+
 (function () {
   'use strict';
-
-  var example = window.example || (window.example = {});
-
-  example.Boot = function () {};
   
-  example.Boot.prototype = {
+  var ref = window['<%= _.slugify(projectName) %>'] || (window['<%= _.slugify(projectName) %>'] = {});
+
+  ref.Boot = function () {};
+  
+  ref.Boot.prototype = {
     
     preload: function () {
       this.load.image('preloader', 'assets/preloader.gif');

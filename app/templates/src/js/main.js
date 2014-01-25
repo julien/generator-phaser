@@ -1,11 +1,14 @@
 window.onload = function () {
   'use strict';
 
-  var game = new Phaser.Game(640, 480, Phaser.AUTO, 'example-game');
-  game.state.add('boot', example.Boot);
-  game.state.add('preloader', example.Preloader);
-  game.state.add('menu', example.Menu);
-  game.state.add('game', example.Game);
+  var ref, game;
+
+  ref = window['<%= _.slugify(projectName) %>'];
+  game = new Phaser.Game(640, 480, Phaser.AUTO, '<%= _.slugify(projectName) %>-game');
+  game.state.add('boot', ref.Boot);
+  game.state.add('preloader', ref.Preloader);
+  game.state.add('menu', ref.Menu);
+  game.state.add('game', ref.Game);
 
   game.state.start('boot');
 };

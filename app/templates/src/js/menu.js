@@ -1,14 +1,14 @@
 (function () {
   'use strict';
 
-  var example = window.example || (window.example = {});
+  var ref = window['<%= _.slugify(projectName) %>'] || (window['<%= _.slugify(projectName) %>'] = {});
 
-  example.Menu = function () {
+  ref.Menu = function () {
     this.titleTxt = null;
     this.startTxt = null;
   };
 
-  example.Menu.prototype = {
+  ref.Menu.prototype = {
     
     create: function () {
       var x = this.game.width / 2

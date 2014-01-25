@@ -1,14 +1,14 @@
 (function () {
   'use strict';
 
-  var example = window.example || (window.example = {});
+  var ref = window['<%= _.slugify(projectName) %>'] || (window['<%= _.slugify(projectName) %>'] = {});
 
-  example.Preloader = function () {
+  ref.Preloader = function () {
     this.asset = null;
     this.ready = false;
   };
 
-  example.Preloader.prototype = {
+  ref.Preloader.prototype = {
     
     preload: function () {
       this.asset = this.add.sprite(320, 240, 'preloader');

@@ -16,9 +16,9 @@
   "devel": true,
   "trailing": true,
   "browser": true,
+  "sub": true,
   "debug": true,
   "globals": {
-    "Phaser": true,
-    "example": true
+    "Phaser": true
   }
 }
