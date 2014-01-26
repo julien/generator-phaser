@@ -1,15 +1,13 @@
-(function () {
+(function() {
   'use strict';
 
-  var ref = window['<%= _.slugify(projectName) %>'] || (window['<%= _.slugify(projectName) %>'] = {});
-
-  ref.Preloader = function () {
+  function Preloader() {
     this.asset = null;
     this.ready = false;
-  };
+  }
 
-  ref.Preloader.prototype = {
-    
+  Preloader.prototype = {
+
     preload: function () {
       this.asset = this.add.sprite(320, 240, 'preloader');
       this.asset.anchor.setTo(0.5, 0.5);
@@ -35,4 +33,7 @@
     }
   };
 
-}(this));
+  window['<%= _.slugify(projectName) %>'] = window['<%= _.slugify(projectName) %>'] || {};
+  window['<%= _.slugify(projectName) %>'].Preloader = Preloader;
+
+}());

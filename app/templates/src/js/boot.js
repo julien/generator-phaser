@@ -1,12 +1,9 @@
-
 (function () {
   'use strict';
-  
-  var ref = window['<%= _.slugify(projectName) %>'] || (window['<%= _.slugify(projectName) %>'] = {});
 
-  ref.Boot = function () {};
-  
-  ref.Boot.prototype = {
+  function Boot() {}
+
+  Boot.prototype = {
     
     preload: function () {
       this.load.image('preloader', 'assets/preloader.gif');
@@ -32,5 +29,8 @@
     }
   };
 
+  window['<%= _.slugify(projectName) %>'] = window['<%= _.slugify(projectName) %>'] || {};
+  window['<%= _.slugify(projectName) %>'].Boot = Boot;
 
-}(this));
+}());
+

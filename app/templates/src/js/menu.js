@@ -1,15 +1,13 @@
-(function () {
+(function() {
   'use strict';
 
-  var ref = window['<%= _.slugify(projectName) %>'] || (window['<%= _.slugify(projectName) %>'] = {});
-
-  ref.Menu = function () {
+  function Menu() {
     this.titleTxt = null;
     this.startTxt = null;
-  };
+  }
 
-  ref.Menu.prototype = {
-    
+  Menu.prototype = {
+
     create: function () {
       var x = this.game.width / 2
         , y = this.game.height / 2;
@@ -26,7 +24,7 @@
     },
 
     update: function () {
-    
+
     },
 
     onDown: function () {
@@ -34,5 +32,7 @@
     }
   };
 
-}(this));
+  window['<%= _.slugify(projectName) %>'] = window['<%= _.slugify(projectName) %>'] || {};
+  window['<%= _.slugify(projectName) %>'].Menu = Menu;
 
+}());

@@ -1,14 +1,12 @@
-(function () {
+(function() {
   'use strict';
 
-  var ref = window['<%= _.slugify(projectName) %>'] || (window['<%= _.slugify(projectName) %>'] = {});
-
-  ref.Game = function () {
+  function Game() {
     this.player = null;
-  };
+  }
 
-  ref.Game.prototype = {
-    
+  Game.prototype = {
+
     create: function () {
       var x = this.game.width / 2
         , y = this.game.height / 2;
@@ -43,6 +41,7 @@
 
   };
 
-}(this));
+  window['<%= _.slugify(projectName) %>'] = window['<%= _.slugify(projectName) %>'] || {};
+  window['<%= _.slugify(projectName) %>'].Game = Game;
 
-
+}());
