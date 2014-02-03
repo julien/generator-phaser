@@ -7,22 +7,23 @@
   "readme": "",
   "repository": "",
   "dependencies": {},
+  
   "devDependencies": {
-    "grunt": "*",
-    "grunt-contrib-connect": "*",
-    "grunt-contrib-copy": "*",
-    "grunt-contrib-clean": "*",
-    "grunt-contrib-jshint": "*",
-    "grunt-contrib-uglify": "*",
-    "grunt-contrib-cssmin": "*",
-    "grunt-contrib-htmlmin": "*",
-    "grunt-contrib-watch": "*",
-    "grunt-curl": "*",
-    "grunt-processhtml": "*"
+    "gulp": "*",
+    "gulp-util": "*",
+    "gulp-concat": "*",
+    "gulp-rename": "*",
+    "gulp-minify-css": "*",
+    "gulp-minify-html": "*",
+    "gulp-processhtml": "*",
+    "gulp-jshint": "*",
+    "gulp-uglify": "*",
+    "gulp-connect": "*",
+    "gulp-watch": "*",
+    "tiny-lr": "*"
   },
 
   "scripts": {
-    "start":   "node -e \"require('grunt').tasks(['server']);\"",
-    "install": "node -e \"require('grunt').tasks(['dist']);\""
+    "test": "echo \"Error: no test specified\" && exit 1"
   }
 }

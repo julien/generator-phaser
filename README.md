@@ -9,7 +9,7 @@ A [Yeoman](http://yeoman.io/) generator to generate HTML5 games with [phaser](ht
 
 + Install the required npm modules by issuing these commands:
 
-  `npm install -g yo generator-phaser`
+  `npm install -g yo generator-phaser gulp`
 
 + Create a new directory for your game:
   + Unix/OSX : `mkdir ~/Desktop/mygame && cd $_`
@@ -21,11 +21,11 @@ A [Yeoman](http://yeoman.io/) generator to generate HTML5 games with [phaser](ht
 
 + Run a local development server (livereload enabled) with this command:
 
-  `npm start`
+  `gulp`
 
 + Package your game (i.e. minify css, html and js) with:
 
-  `npm install`
+  `gulp build`
 
 **TODO**
 
@@ -39,8 +39,9 @@ A [Yeoman](http://yeoman.io/) generator to generate HTML5 games with [phaser](ht
 
 + The guys behind [yeoman](https://github.com/yeoman/yeoman).
 
-+ [Ben Alman](http://benalman.com/) for [Grunt](http://gruntjs.com/)
++ [Glup.js](http://www.gulpjs.com)
 
++ [Ben Alman](http://benalman.com/) for [Grunt](http://gruntjs.com/)
 
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/julien/generator-phaser/trend.png)](https://bitdeli.com/free "Bitdeli Badge")

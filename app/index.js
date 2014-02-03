@@ -38,7 +38,8 @@ PhaserGenerator.prototype.app = function app() {
   this.mkdir('src/js/lib');
 
   this.template('_package.json', 'package.json');
-  this.copy('_Gruntfile.coffee', 'Gruntfile.coffee');
+  // this.copy('_Gruntfile.coffee', 'Gruntfile.coffee');
+  this.copy('_gulpfile.js', 'gulpfile.js');
 };
 
 PhaserGenerator.prototype.projectfiles = function projectfiles() {
