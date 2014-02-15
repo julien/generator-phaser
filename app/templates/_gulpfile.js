@@ -8,7 +8,6 @@ var gulp = require('gulp')
   , jshint = require('gulp-jshint')
   , uglify = require('gulp-uglify')
   , connect = require('gulp-connect')
-  , download = require('gulp-download')
   , paths;
 
 paths = {
@@ -17,16 +16,6 @@ paths = {
   js:     ['src/js/**/*.js', '!src/js/lib/*.js'],
   dist:   './dist/'
 };
-
-
-gulp.task('download', function () {
-  // for the moment grab phaser from GitHub
-  // as it seems the official version is not
-  // in the Bower registry ... this should be
-  // handled by Bower later on.
-  download(['https://raw.github.com/photonstorm/phaser/master/build/phaser.js'])
-    .pipe(gulp.dest('src/js/lib/'));
-});
 
 gulp.task('copy', function () {
   gulp.src(paths.assets).pipe(gulp.dest(paths.dist + 'assets'));
@@ -68,6 +57,11 @@ gulp.task('jshint', function() {
     .pipe(jshint.reporter('default'));
 });
 
+gulp.task('html', function(){
+  gulp.src('src/*.html')
+    .pipe(connect.reload());
+});
+
 gulp.task('connect', connect.server({
   root: [__dirname + '/src'],
   port: 9000,
@@ -79,7 +73,7 @@ gulp.task('connect', connect.server({
 
 gulp.task('watch', function () {
   gulp.watch(paths.js, ['jshint']);
-  gulp.watch(['./src/index.html', paths.css, paths.js], connect.reload);
+  gulp.watch(['./src/index.html', paths.css, paths.js], ['html']);
 });
 
 gulp.task('default', ['connect', 'watch']);
