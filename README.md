@@ -27,10 +27,6 @@ A [Yeoman](http://yeoman.io/) generator to generate HTML5 games with [phaser](ht
 
   `gulp build`
 
-**TODO**
-
-+ Add [Bower](http://bower.io/) specific files once Phaser is in the Bower registry. 
-
 
 **CREDITS**
 
