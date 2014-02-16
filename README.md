@@ -40,7 +40,6 @@ A [Yeoman](http://yeoman.io/) generator to generate HTML5 games with [phaser](ht
 + [Ben Alman](http://benalman.com/) for [Grunt](http://gruntjs.com/)
 
 
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/julien/generator-phaser/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
 
 
