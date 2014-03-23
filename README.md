@@ -35,7 +35,7 @@ A [Yeoman](http://yeoman.io/) generator to generate HTML5 games with [phaser](ht
 
 + The guys behind [yeoman](https://github.com/yeoman/yeoman).
 
-+ [Glup.js](http://www.gulpjs.com)
++ [Gulp.js](http://www.gulpjs.com)
 
 + [Ben Alman](http://benalman.com/) for [Grunt](http://gruntjs.com/)
 
