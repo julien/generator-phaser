@@ -11,12 +11,7 @@ A [Yeoman](http://yeoman.io/) generator to generate HTML5 games with [phaser](ht
 
   `npm install -g yo generator-phaser`
 
-  *You can optionally install 
-   [Gulp](http://gulpjs.com) globally 
-
-  `npm install -g gulp`
-  
-  but you don't have to.*
+  *You can optionally install [Gulp](http://gulpjs.com) globally `npm install -g gulp` but you don't have to.*
 
 + Create a new directory for your game:
   + Unix/OSX : `mkdir ~/Desktop/mygame && cd $_`
@@ -30,17 +25,13 @@ A [Yeoman](http://yeoman.io/) generator to generate HTML5 games with [phaser](ht
 
   `npm start`
   
-  *If you have Gulp installed globally you can also use:* 
-   
-  `gulp`
+  *If you have Gulp installed globally you can also use: `gulp`*
 
 + Package your game (i.e. minify css, html and js) with:
 
   `npm run build` 
 
-  *If you have Gulp installed globally you can also use:* 
-   
-  `gulp build`
+  *If you have Gulp installed globally you can also use: `gulp build`*
 
 
 **CREDITS**
