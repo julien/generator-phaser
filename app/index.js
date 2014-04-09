@@ -35,7 +35,6 @@ PhaserGenerator.prototype.app = function app() {
   this.mkdir('src/assets');
   this.mkdir('src/css');
   this.mkdir('src/js');
-  this.mkdir('src/js/lib');
 
   this.template('_package.json', 'package.json');
   this.template('_bower.json', 'bower.json');

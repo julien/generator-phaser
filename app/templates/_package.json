@@ -9,8 +9,10 @@
   "dependencies": {},
   
   "devDependencies": {
+    "bower": "*",
     "gulp": "*",
     "gulp-util": "*",
+    "gulp-clean": "*",
     "gulp-concat": "*",
     "gulp-download": "*",
     "gulp-rename": "*",
@@ -25,6 +27,10 @@
   },
 
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "post-install": "node ./node_modules/bower/bin/bower install",
+    "start": "node ./node_modules/gulp/bin/gulp.js",
+
+    "build": "node ./node_modules/gulp/bin/gulp.js build",
+    "lint":  "node ./node_modules/gulp/bin/gulp.js lint"
   }
 }

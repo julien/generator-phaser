@@ -1,6 +1,6 @@
 {
   "name": "generator-phaser",
-  "version": "0.16.0",
+  "version": "0.17.0",
   "description": "A Yeoman generator to generate HTML5 games with phaser.js",
   "keywords": [
     "yeoman-generator",
@@ -31,10 +31,10 @@
     "test": "mocha"
   },
   "dependencies": {
-    "yeoman-generator": "~0.13.0"
+    "yeoman-generator": "*"
   },
   "devDependencies": {
-    "mocha": "~1.12.0"
+    "mocha": "*"
   },
   "peerDependencies": {
     "yo": ">=1.0.0"
