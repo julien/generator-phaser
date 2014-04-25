@@ -1,63 +1,69 @@
 'use strict';
-var util = require('util')
-  , path = require('path')
-  , os = require('os')
-  , yeoman = require('yeoman-generator')
-  , PhaserGenerator;
+var util = require('util');
+var path = require('path');
+var yeoman = require('yeoman-generator');
+var chalk = require('chalk');
 
-PhaserGenerator = module.exports = function PhaserGenerator(args, options, config) {
-  yeoman.generators.Base.apply(this, arguments);
-  this.on('end', function () {
-    this.installDependencies({ skipInstall: options['skip-install'] });
-  });
-  this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
-};
 
-util.inherits(PhaserGenerator, yeoman.generators.Base);
+var PhaserGenerator = yeoman.generators.Base.extend({
+  init: function () {
+    this.pkg = require('../package.json');
 
-PhaserGenerator.prototype.askFor = function askFor() {
-  var cb = this.async();
+    this.on('end', function () {
+      if (!this.options['skip-install']) {
+        this.installDependencies();
+      }
+    });
+  },
 
-  var prompts = [{
-    type: 'input',
-    name: 'projectName',
-    message: 'What is the name of your project?'
-  }];
+  askFor: function () {
+    var done = this.async();
 
-  this.prompt(prompts, function (props) {
-    this.projectName = props.projectName;
-    cb();
-  }.bind(this));
-};
+    this.log(chalk.magenta('... Phaser ...'));
 
-PhaserGenerator.prototype.app = function app() {
-  this.mkdir('src');
-  this.mkdir('src/assets');
-  this.mkdir('src/css');
-  this.mkdir('src/js');
+    var prompts = [{
+      type: 'input',
+      name: 'projectName',
+      message: 'What\'s the name of your application'
+    }];
 
-  this.template('_package.json', 'package.json');
-  this.template('_bower.json', 'bower.json');
+    this.prompt(prompts, function (props) {
+      this.projectName = props.projectName || ' ';
+      done();
+    }.bind(this));
+  },
 
-  this.copy('bowerrc', '.bowerrc');
-  this.copy('_gulpfile.js', 'gulpfile.js');
-};
+  app: function () {
+    this.mkdir('src');
+    this.mkdir('src/assets');
+    this.mkdir('src/css');
+    this.mkdir('src/js');
 
-PhaserGenerator.prototype.projectfiles = function projectfiles() {
-  this.copy('jshintrc', '.jshintrc');
-  this.copy('gitignore', '.gitignore');
+    this.template('_package.json', 'package.json');
+    this.template('_bower.json', 'bower.json');
 
-  this.copy('src/assets/minecraftia.png', 'src/assets/minecraftia.png');
-  this.copy('src/assets/minecraftia.xml', 'src/assets/minecraftia.xml');
-  this.copy('src/assets/player.png', 'src/assets/player.png');
-  this.copy('src/assets/preloader.gif', 'src/assets/preloader.gif');
-  this.copy('src/css/main.css', 'src/css/main.css');
-  
-  this.template('src/js/boot.js', 'src/js/boot.js');
-  this.template('src/js/game.js', 'src/js/game.js');
-  this.template('src/js/main.js', 'src/js/main.js');
-  this.template('src/js/menu.js', 'src/js/menu.js');
-  this.template('src/js/preloader.js', 'src/js/preloader.js');
-  this.template('src/index.html', 'src/index.html');
-};
+    this.copy('bowerrc', '.bowerrc');
+    this.copy('_gulpfile.js', 'gulpfile.js');
+  },
+
+  projectfiles: function () {
+    this.copy('jshintrc', '.jshintrc');
+    this.copy('gitignore', '.gitignore');
+
+    this.copy('src/assets/minecraftia.png', 'src/assets/minecraftia.png');
+    this.copy('src/assets/minecraftia.xml', 'src/assets/minecraftia.xml');
+    this.copy('src/assets/player.png', 'src/assets/player.png');
+    this.copy('src/assets/preloader.gif', 'src/assets/preloader.gif');
+    this.copy('src/css/main.css', 'src/css/main.css');
+    
+    this.template('src/js/boot.js', 'src/js/boot.js');
+    this.template('src/js/game.js', 'src/js/game.js');
+    this.template('src/js/main.js', 'src/js/main.js');
+    this.template('src/js/menu.js', 'src/js/menu.js');
+    this.template('src/js/preloader.js', 'src/js/preloader.js');
+    this.template('src/index.html', 'src/index.html');
+  }
+});
+
+module.exports = PhaserGenerator;
 

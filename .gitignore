@@ -3,3 +3,4 @@
 .listing.html
 dist/
 node_modules/
+test/temp/*
