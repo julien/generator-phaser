@@ -43,16 +43,16 @@
   },
 
   "dependencies": {
-    "yeoman-generator": "latest"
+    "yeoman-generator": "~0.16.0",
+    "chalk": "~0.4.0"
   },
-
+  
   "devDependencies": {
-    "chalk": "latest",
-    "mocha": "latest"
+    "mocha": "*"
   },
 
   "peerDependencies": {
-    "yo": "latest"
+    "yo": ">=1.0.0"
   },
 
   "engines": {
