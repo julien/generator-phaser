@@ -22,18 +22,19 @@ paths = {
 };
 
 gulp.task('clean', function () {
-  gulp.src(paths.dist, {read: false})
+  var stream = gulp.src(paths.dist, {read: false})
     .pipe(clean({force: true}))
     .on('error', gutil.log);
+  return stream;
 });
 
-gulp.task('copy', function () {
+gulp.task('copy', ['clean'], function () {
   gulp.src(paths.assets)
     .pipe(gulp.dest(paths.dist + 'assets'))
     .on('error', gutil.log);
 });
 
-gulp.task('uglify', ['lint'], function () {
+gulp.task('uglify', ['clean','lint'], function () {
   var srcs = [paths.libs[0], paths.js[0]];
 
   gulp.src(srcs)
@@ -43,7 +44,7 @@ gulp.task('uglify', ['lint'], function () {
     .pipe(gulp.dest(paths.dist));
 });
 
-gulp.task('minifycss', function () {
+gulp.task('minifycss', ['clean'], function () {
  gulp.src(paths.css)
     .pipe(minifycss({
       keepSpecialComments: false,
@@ -54,14 +55,14 @@ gulp.task('minifycss', function () {
     .on('error', gutil.log);
 });
 
-gulp.task('processhtml', function() {
+gulp.task('processhtml', ['clean'], function() {
   gulp.src('src/index.html')
     .pipe(processhtml('index.html'))
     .pipe(gulp.dest(paths.dist))
     .on('error', gutil.log);
 });
 
-gulp.task('minifyhtml', function() {
+gulp.task('minifyhtml', ['clean'], function() {
   gulp.src('dist/index.html')
     .pipe(minifyhtml())
     .pipe(gulp.dest(paths.dist))
@@ -95,5 +96,5 @@ gulp.task('watch', function () {
 });
 
 gulp.task('default', ['connect', 'watch']);
-gulp.task('build', ['clean', 'copy', 'uglify', 'minifycss', 'processhtml', 'minifyhtml']);
+gulp.task('build', ['copy', 'uglify', 'minifycss', 'processhtml', 'minifyhtml']);
 
