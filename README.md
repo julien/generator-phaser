@@ -20,6 +20,12 @@ A [Yeoman](http://yeoman.io/) generator to generate HTML5 games with [phaser](ht
 + Invoke the generator:
 
   `yo phaser`
+  
++ Add new Phaser state (optional, generator creates basic initial states):
+  
+  `yo phaser:state`
+  
+  *You will be asked for a new state name.*
 
 + Run a local development server (livereload enabled) with this command:
 
