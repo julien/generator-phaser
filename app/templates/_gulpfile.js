@@ -1,6 +1,6 @@
 var gulp = require('gulp')
   , gutil = require('gulp-util')
-  , clean = require('gulp-clean')
+  , clean = require('gulp-rimraf')
   , concat = require('gulp-concat')
   , rename = require('gulp-rename')
   , minifycss = require('gulp-minify-css')
@@ -13,7 +13,7 @@ var gulp = require('gulp')
 
 paths = {
   assets: 'src/assets/**/*',
-  css:    'src/css/*.css', 
+  css:    'src/css/*.css',
   libs:   [
     'src/bower_components/phaser-official/build/phaser.min.js'
   ],
@@ -97,4 +97,3 @@ gulp.task('watch', function () {
 
 gulp.task('default', ['connect', 'watch']);
 gulp.task('build', ['copy', 'uglify', 'minifycss', 'processhtml', 'minifyhtml']);
-
