@@ -3,7 +3,7 @@ var util = require('util');
 var path = require('path');
 var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
-
+var foldername = path.basename(process.cwd());
 
 var PhaserGenerator = yeoman.generators.Base.extend({
   init: function () {
@@ -24,7 +24,8 @@ var PhaserGenerator = yeoman.generators.Base.extend({
     var prompts = [{
       type: 'input',
       name: 'projectName',
-      message: 'What\'s the name of your application'
+      message: 'What\'s the name of your application',
+      default: foldername
     }];
 
     this.prompt(prompts, function (props) {
@@ -55,7 +56,7 @@ var PhaserGenerator = yeoman.generators.Base.extend({
     this.copy('src/assets/player.png', 'src/assets/player.png');
     this.copy('src/assets/preloader.gif', 'src/assets/preloader.gif');
     this.copy('src/css/main.css', 'src/css/main.css');
-    
+
     this.template('src/js/boot.js', 'src/js/boot.js');
     this.template('src/js/game.js', 'src/js/game.js');
     this.template('src/js/main.js', 'src/js/main.js');
@@ -66,4 +67,3 @@ var PhaserGenerator = yeoman.generators.Base.extend({
 });
 
 module.exports = PhaserGenerator;
-
