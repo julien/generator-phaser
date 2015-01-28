@@ -1,6 +1,6 @@
 var gulp = require('gulp')
   , gutil = require('gulp-util')
-  , clean = require('gulp-rimraf')
+  , del = require('del')
   , concat = require('gulp-concat')
   , rename = require('gulp-rename')
   , minifycss = require('gulp-minify-css')
@@ -21,11 +21,8 @@ paths = {
   dist:   './dist/'
 };
 
-gulp.task('clean', function () {
-  var stream = gulp.src(paths.dist, {read: false})
-    .pipe(clean({force: true}))
-    .on('error', gutil.log);
-  return stream;
+gulp.task('clean', function (cb) {
+  del([paths.dist], cb);
 });
 
 gulp.task('copy', ['clean'], function () {
