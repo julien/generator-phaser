@@ -9,11 +9,15 @@
   Preloader.prototype = {
 
     preload: function () {
-      this.asset = this.add.sprite(320, 240, 'preloader');
-      this.asset.anchor.setTo(0.5, 0.5);
+      this.asset = this.add.sprite(this.game.width * 0.5 - 110, this.game.height * 0.5 - 10, 'preloader');
 
       this.load.onLoadComplete.addOnce(this.onLoadComplete, this);
       this.load.setPreloadSprite(this.asset);
+      
+      this.loadResources();
+    },
+      
+    loadResources: function () {
       this.load.image('player', 'assets/player.png');
       this.load.bitmapFont('minecraftia', 'assets/minecraftia.png', 'assets/minecraftia.xml');
     },
