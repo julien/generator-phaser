@@ -25,16 +25,20 @@ gulp.task('clean', function (cb) {
   del([paths.dist], cb);
 });
 
-gulp.task('copy', ['clean'], function () {
+gulp.task('copy-assets', ['clean'], function () {
   gulp.src(paths.assets)
     .pipe(gulp.dest(paths.dist + 'assets'))
     .on('error', gutil.log);
 });
 
-gulp.task('uglify', ['clean','lint'], function () {
-  var srcs = [paths.libs[0], paths.js[0]];
+gulp.task('copy-vendor', ['clean'], function () {
+  gulp.src(paths.libs)
+    .pipe(gulp.dest(paths.dist))
+    .on('error', gutil.log);
+});
 
-  gulp.src(srcs)
+gulp.task('uglify', ['clean','lint'], function () {
+  gulp.src(paths.js)
     .pipe(concat('main.min.js'))
     .pipe(gulp.dest(paths.dist))
     .pipe(uglify({outSourceMaps: false}))
@@ -93,4 +97,4 @@ gulp.task('watch', function () {
 });
 
 gulp.task('default', ['connect', 'watch']);
-gulp.task('build', ['copy', 'uglify', 'minifycss', 'processhtml', 'minifyhtml']);
+gulp.task('build', ['copy-assets', 'copy-vendor', 'uglify', 'minifycss', 'processhtml', 'minifyhtml']);
