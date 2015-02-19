@@ -1,6 +1,6 @@
 {
   "name": "generator-phaser",
-  "version": "0.24.0",
+  "version": "0.25.0",
   "description": "A Yeoman generator to generate HTML5 games with phaser.js",
 
   "keywords": [
@@ -25,6 +25,24 @@
     "name": "Denis Ciccale",
     "email": "dciccale@gmail.com",
     "url": "https://github.com/dciccale"
+  }, {
+    "name": "GeenenTijd",
+    "url": "http://geenentijd.be"
+  }, {
+    "name": "Mert Kahyaoğlu",
+    "url": "http://mertkahyaoglu.github.io"
+  }, {
+    "name": "bojank",
+    "url": "http://bojancode.com"
+  }, {
+    "name": "Zach Latta",
+    "url": "http://zachlatta.com"
+  }, {
+    "name": "krzychukula",
+    "url": "http://krzychukula.blogspot.com"
+  }, {
+    "name": "Juan Carlos Alonso",
+    "url": "http://jcalonso.com"
   }],
 
   "main": "app/index.js",
