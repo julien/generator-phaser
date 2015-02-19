@@ -26,10 +26,33 @@ var PhaserGenerator = yeoman.generators.Base.extend({
       name: 'projectName',
       message: 'What\'s the name of your application',
       default: foldername
+    }, {
+      type: 'list',
+      name: 'phaserBuild',
+      message: 'Which version of Phaser do you want?',
+      choices: [
+        {
+          value: 'phaser.min.js',
+          name: 'Arcade Physics + P2 Physics (Default)'
+        },
+        {
+          value: 'custom/phaser-arcade-physics.min.js',
+          name: 'Arcade Physics' 
+        },
+        {
+          value: 'custom/phaser-ninja-physics.min.js',
+          name: 'Ninja Physics'
+        },
+        {
+          value: 'custom/phaser-no-physics.min.js',
+          name: 'No Physics'
+        }
+      ]
     }];
 
     this.prompt(prompts, function (props) {
       this.projectName = props.projectName || ' ';
+      this.phaserBuild = props.phaserBuild || 'phaser.min.js';
       done();
     }.bind(this));
   },

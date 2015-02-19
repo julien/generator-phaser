@@ -17,8 +17,8 @@
   <script src="http://localhost:35729/livereload.js"></script>  
   <!-- /build -->
 
-  <!-- build:js phaser.min.js-->
-  <script src="bower_components/phaser-official/build/phaser.min.js"></script>
+  <!-- build:js <%= phaserBuild.substring(phaserBuild.lastIndexOf('/') + 1) %>-->
+  <script src="bower_components/phaser-official/build/<%= phaserBuild %>"></script>
   <!-- /build -->
     
   <!-- build:js main.min.js -->
