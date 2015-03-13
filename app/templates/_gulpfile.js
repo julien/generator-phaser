@@ -58,7 +58,7 @@ gulp.task('minifycss', ['clean'], function () {
 
 gulp.task('processhtml', ['clean'], function() {
   gulp.src('src/index.html')
-    .pipe(processhtml('index.html'))
+    .pipe(processhtml({}))
     .pipe(gulp.dest(paths.dist))
     .on('error', gutil.log);
 });
