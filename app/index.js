@@ -37,7 +37,7 @@ var PhaserGenerator = yeoman.generators.Base.extend({
         },
         {
           value: 'custom/phaser-arcade-physics.min.js',
-          name: 'Arcade Physics' 
+          name: 'Arcade Physics'
         },
         {
           value: 'custom/phaser-ninja-physics.min.js',
@@ -59,7 +59,6 @@ var PhaserGenerator = yeoman.generators.Base.extend({
 
   app: function () {
     this.mkdir('src');
-    this.mkdir('src/assets');
     this.mkdir('src/css');
     this.mkdir('src/js');
 
@@ -74,17 +73,9 @@ var PhaserGenerator = yeoman.generators.Base.extend({
     this.copy('jshintrc', '.jshintrc');
     this.copy('gitignore', '.gitignore');
 
-    this.copy('src/assets/minecraftia.png', 'src/assets/minecraftia.png');
-    this.copy('src/assets/minecraftia.xml', 'src/assets/minecraftia.xml');
-    this.copy('src/assets/player.png', 'src/assets/player.png');
-    this.copy('src/assets/preloader.gif', 'src/assets/preloader.gif');
     this.copy('src/css/main.css', 'src/css/main.css');
 
-    this.template('src/js/boot.js', 'src/js/boot.js');
-    this.template('src/js/game.js', 'src/js/game.js');
     this.template('src/js/main.js', 'src/js/main.js');
-    this.template('src/js/menu.js', 'src/js/menu.js');
-    this.template('src/js/preloader.js', 'src/js/preloader.js');
     this.template('src/index.html', 'src/index.html');
   }
 });
