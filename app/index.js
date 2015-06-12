@@ -73,9 +73,14 @@ var PhaserGenerator = yeoman.generators.Base.extend({
     this.copy('jshintrc', '.jshintrc');
     this.copy('gitignore', '.gitignore');
 
+    this.copy('src/assets/preloader.gif', 'src/assets/preloader.gif');
     this.copy('src/css/main.css', 'src/css/main.css');
 
+    this.template('src/js/boot.js', 'src/js/boot.js');
+    this.template('src/js/game.js', 'src/js/game.js');
     this.template('src/js/main.js', 'src/js/main.js');
+    this.template('src/js/menu.js', 'src/js/menu.js');
+    this.template('src/js/preloader.js', 'src/js/preloader.js');
     this.template('src/index.html', 'src/index.html');
   }
 });

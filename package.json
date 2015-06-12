@@ -69,12 +69,10 @@
   },
 
   "devDependencies": {
-    "mocha": "*"
-  },
-
-  "peerDependencies": {
+    "mocha": "*",
     "yo": ">=1.0.0"
   },
+
 
   "engines": {
     "node": ">=0.8.0",
