@@ -37,7 +37,7 @@ var PhaserGenerator = yeoman.generators.Base.extend({
         },
         {
           value: 'custom/phaser-arcade-physics.min.js',
-          name: 'Arcade Physics' 
+          name: 'Arcade Physics'
         },
         {
           value: 'custom/phaser-ninja-physics.min.js',
@@ -59,7 +59,6 @@ var PhaserGenerator = yeoman.generators.Base.extend({
 
   app: function () {
     this.mkdir('src');
-    this.mkdir('src/assets');
     this.mkdir('src/css');
     this.mkdir('src/js');
 
@@ -74,9 +73,6 @@ var PhaserGenerator = yeoman.generators.Base.extend({
     this.copy('jshintrc', '.jshintrc');
     this.copy('gitignore', '.gitignore');
 
-    this.copy('src/assets/minecraftia.png', 'src/assets/minecraftia.png');
-    this.copy('src/assets/minecraftia.xml', 'src/assets/minecraftia.xml');
-    this.copy('src/assets/player.png', 'src/assets/player.png');
     this.copy('src/assets/preloader.gif', 'src/assets/preloader.gif');
     this.copy('src/css/main.css', 'src/css/main.css');
 

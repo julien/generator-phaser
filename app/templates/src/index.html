@@ -5,22 +5,22 @@
   <title><%= _.slugify(projectName) %></title>
 
   <!-- build:css main.min.css -->
-  <link rel="stylesheet" href="css/main.css"> 
+  <link rel="stylesheet" href="css/main.css">
   <!-- /build -->
 </head>
 
 <body>
-  
+
   <div id="<%= _.slugify(projectName) %>-game" class="game"></div>
 
   <!-- build:remove -->
-  <script src="http://localhost:35729/livereload.js"></script>  
+  <script src="http://localhost:35729/livereload.js"></script>
   <!-- /build -->
 
   <!-- build:js <%= phaserBuild.substring(phaserBuild.lastIndexOf('/') + 1) %>-->
   <script src="bower_components/phaser-official/build/<%= phaserBuild %>"></script>
   <!-- /build -->
-    
+
   <!-- build:js main.min.js -->
   <script src="js/boot.js"></script>
   <script src="js/preloader.js"></script>
