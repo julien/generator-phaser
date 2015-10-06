@@ -24,7 +24,7 @@ var StateGenerator = yeoman.generators.Base.extend({
     }];
 
     this.prompt(prompts, function (props) {
-      this.stateName = props.stateName || ' ';
+      this.stateName = props.stateName.toLowerCase() || ' ';
       done();
     }.bind(this));
   },
@@ -32,7 +32,7 @@ var StateGenerator = yeoman.generators.Base.extend({
   state: function () {
     //add new state js file from template
     this.template('src/js/state.js', 'src/js/'+ this.stateName +'.js');
-    
+
     //add reference to new state file to index.html
     var path = "src/index.html",
     file = this.readFileAsString(path),
@@ -48,7 +48,7 @@ var StateGenerator = yeoman.generators.Base.extend({
     file = file.replace(needle, "game.state.add('"+this.stateName+"', ns."+stateNameCap+");\n  "+needle);
     this.write(path, file);
   }
-  
+
 });
 
 module.exports = StateGenerator;
