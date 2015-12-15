@@ -20,20 +20,22 @@ describe('phaser generator', function () {
   it('creates expected files', function (done) {
     var expected = [
       // add files you expect to exist here.
-      '.jshintrc',
-      '.gitignore',
+
       '.bowerrc',
+      '.gitignore',
+      '.jshintrc',
+      'bower.json',
       'gulpfile.js',
-      'src/assets/minecraftia.png',
-      'src/assets/minecraftia.xml',
-      'src/assets/player.png',
+      'package.json',
       'src/assets/preloader.gif',
       'src/css/main.css',
+      'src/index.html',
       'src/js/boot.js',
+      'src/js/game.js',
       'src/js/main.js',
       'src/js/menu.js',
-      'src/js/preloader.js',
-      'src/index.html'
+      'src/js/preloader.js'
+
     ];
 
     helpers.mockPrompt(this.app, {
