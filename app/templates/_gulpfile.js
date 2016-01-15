@@ -22,7 +22,7 @@ paths = {
 };
 
 gulp.task('clean', function (cb) {
-  del([paths.dist], cb);
+  return del([paths.dist], cb);
 });
 
 gulp.task('copy-assets', ['clean'], function () {
