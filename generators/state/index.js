@@ -1,15 +1,15 @@
 'use strict';
 var util = require('util');
-var yeoman = require('yeoman-generator');
+var generators = require('yeoman-generator');
 var chalk = require('chalk');
 
+var StateGenerator = generators.NamedBase.extend({
 
-var StateGenerator = yeoman.generators.Base.extend({
   init: function () {
-    this.pkg = require('../package.json');
+    this.pkg = require('../../package.json');
     this.conflicter.force = true;
     var localpkg = this.dest.readJSON('package.json');
-	this.projectName = localpkg.name;
+    this.projectName = localpkg.name;
   },
 
   askFor: function () {

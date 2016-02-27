@@ -1,6 +1,6 @@
 {
   "name": "generator-phaser",
-  "version": "0.33.0",
+  "version": "0.34.0",
   "description": "A Yeoman generator to generate HTML5 games with phaser.js",
 
   "keywords": [
@@ -17,41 +17,9 @@
     "url": "https://github.com/julien"
   },
 
-  "contributors": [{
-    "name": "Julien Castelain",
-    "email": "jcastelain@gmail.com",
-    "url": "https://github.com/julien"
-  }, {
-    "name": "Denis Ciccale",
-    "email": "dciccale@gmail.com",
-    "url": "https://github.com/dciccale"
-  }, {
-    "name": "GeenenTijd",
-    "url": "http://geenentijd.be"
-  }, {
-    "name": "Mert Kahyaoğlu",
-    "url": "http://mertkahyaoglu.github.io"
-  }, {
-    "name": "bojank",
-    "url": "http://bojancode.com"
-  }, {
-    "name": "Zach Latta",
-    "url": "http://zachlatta.com"
-  }, {
-    "name": "krzychukula",
-    "url": "http://krzychukula.blogspot.com"
-  }, {
-    "name": "Juan Carlos Alonso",
-    "url": "http://jcalonso.com"
-  }, {
-    "name": "Bram Perry",
-    "url": "https://github.com/bramchi"
-  }],
-
-  "main": "app/index.js",
-
   "files": [
-    "app"
+    "generators/app",
+    "generators/state"
   ],
 
   "repository": {
@@ -64,19 +32,12 @@
   },
 
   "dependencies": {
-    "yeoman-generator": "~0.16.0",
-    "chalk": "~0.4.0"
+    "yeoman-generator": ">=0.22.5",
+    "chalk": "^1.0.0"
   },
 
   "devDependencies": {
-    "mocha": "*",
-    "yo": ">=1.0.0"
-  },
-
-
-  "engines": {
-    "node": ">=0.8.0",
-    "npm": ">=1.2.10"
+    "mocha": "*"
   },
 
   "license": "MIT"

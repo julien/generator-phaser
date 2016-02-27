@@ -1,13 +1,13 @@
 'use strict';
 var util = require('util');
 var path = require('path');
-var yeoman = require('yeoman-generator');
+var generators = require('yeoman-generator');
 var chalk = require('chalk');
 var foldername = path.basename(process.cwd());
 
-var PhaserGenerator = yeoman.generators.Base.extend({
+var PhaserGenerator = generators.Base.extend({
   init: function () {
-    this.pkg = require('../package.json');
+    this.pkg = require('../../package.json');
 
     this.on('end', function () {
       if (!this.options['skip-install']) {
