@@ -1,44 +1,34 @@
 {
   "name": "generator-phaser",
-  "version": "0.34.0",
+  "version": "0.35.0",
   "description": "A Yeoman generator to generate HTML5 games with phaser.js",
-
   "keywords": [
     "yeoman-generator",
     "phaser"
   ],
-
   "homepage": "https://github.com/julien/generator-phaser",
   "bugs": "https://github.com/julien/generator-phaser/issues",
-
   "author": {
     "name": "Julien Castelain",
     "email": "jcastelain@gmail.com",
     "url": "https://github.com/julien"
   },
-
   "files": [
-    "generators/app",
-    "generators/state"
+    "app"
   ],
-
   "repository": {
     "type": "git",
     "url": "git://github.com/julien/generator-phaser.git"
   },
-
   "scripts": {
     "test": "mocha"
   },
-
   "dependencies": {
-    "yeoman-generator": ">=0.22.5",
-    "chalk": "^1.0.0"
+    "chalk": "^1.0.0",
+    "yeoman-generator": "^0.22.5"
   },
-
   "devDependencies": {
     "mocha": "*"
   },
-
   "license": "MIT"
 }

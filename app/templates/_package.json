@@ -1,0 +1,29 @@
+{
+  "name": "<%= projectName %>",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start":       "budo src/main.js:bundle.js --live",
+    "prebuild":    "mkdir -p build",
+    "build":       "npm run build:js && npm run build:css && npm run build:html && npm run copy:all",
+    "build:js":    "browserify src/main.js | uglifyjs -cm > build/bundle.min.js",
+    "build:css":   "cleancss css/main.css -o build/main.min.css",
+    "build:html":  "htmlprocessor index.html -o build/index.html",
+    "copy:all":    "npm run copy:assets && npm run copy:phaser",
+    "copy:assets": "cp -rf assets build/",
+    "copy:phaser": "cp -rf node_modules/phaser/build/<%= phaserBuild %> build/<%= phaserBuild %>"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "phaser": "^2.4.6"
+  },
+  "devDependencies": {
+    "browserify": "^13.0.0",
+    "budo": "^8.0.4",
+    "clean-css": "^3.4.9",
+    "htmlprocessor": "^0.2.3",
+    "uglify-js": "^2.6.2"
+  }
+}

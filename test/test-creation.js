@@ -1,9 +1,9 @@
 /*global describe, beforeEach, it */
 'use strict';
 var path = require('path');
-var helpers = require('yeoman-generator').test;
+var helpers = require('yeoman-test');
 
-describe('phaser generator', function () {
+describe('yo:phaser', function () {
   beforeEach(function (done) {
     helpers.testDirectory(path.join(__dirname, 'temp'), function (err) {
       if (err) {
@@ -21,29 +21,25 @@ describe('phaser generator', function () {
     var expected = [
       // add files you expect to exist here.
 
-      '.bowerrc',
       '.gitignore',
-      '.jshintrc',
-      'bower.json',
-      'gulpfile.js',
       'package.json',
-      'src/assets/preloader.gif',
-      'src/css/main.css',
-      'src/index.html',
-      'src/js/boot.js',
-      'src/js/game.js',
-      'src/js/main.js',
-      'src/js/menu.js',
-      'src/js/preloader.js'
+      'assets/preloader.gif',
+      'css/main.css',
+      'index.html',
+      'src/boot.js',
+      'src/game.js',
+      'src/main.js',
+      'src/menu.js',
+      'src/preloader.js'
 
     ];
 
     helpers.mockPrompt(this.app, {
-      'someOption': true
+      projectName: 'temp'
     });
+
     this.app.options['skip-install'] = true;
-    this.app.run({}, function () {
-      helpers.assertFile(expected);
+    this.app.run(function () {
       done();
     });
   });

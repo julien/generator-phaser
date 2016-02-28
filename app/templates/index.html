@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title><%= projectName %></title>
+
+  <!-- build:css main.min.css -->
+  <link rel="stylesheet" href="css/main.css">
+  <!-- /build -->
+</head>
+
+<body>
+
+  <div id="<%= projectName %>-game" class="game"></div>
+
+  <!-- build:remove -->
+  <script src="http://localhost:35729/livereload.js"></script>
+  <!-- /build -->
+
+  <!-- build:js <%= phaserBuild %> -->
+  <script src="node_modules/phaser/build/<%= phaserBuild %>"></script>
+  <!-- /build -->
+
+  <!-- build:js bundle.min.js -->
+  <script src="bundle.js"></script>
+  <!-- /build -->
+
+</body>
+</html>
+
