@@ -53,6 +53,7 @@ var PhaserGenerator = generators.Base.extend({
     this.prompt(prompts, function (props) {
       this.projectName = props.projectName || ' ';
       this.phaserBuild = props.phaserBuild || 'phaser.min.js';
+      this.customBuild = this.phaserBuild.indexOf("custom/") !== -1 ? true : false;
       done();
     }.bind(this));
   },
