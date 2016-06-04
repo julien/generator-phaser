@@ -48,12 +48,27 @@ var PhaserGenerator = generators.Base.extend({
           name: 'No Physics'
         }
       ]
+    }, {
+      type: 'list',
+      name: 'esVersion',
+      message: 'Which ECMAScript version do you want to use?',
+      choices: [
+        {
+          value: 6,
+          name: 'ECMAScript 6/2015 (Default)'
+        },
+        {
+          value: 5,
+          name: 'ECMAScript 5'
+        }
+      ]
     }];
 
     this.prompt(prompts, function (props) {
       this.projectName = props.projectName || ' ';
       this.phaserBuild = props.phaserBuild || 'phaser.min.js';
       this.customBuild = this.phaserBuild.indexOf("custom/") !== -1 ? true : false;
+      this.srcDir = this.esVersion === 5 ? 'es5/' : 'es6/';
       done();
     }.bind(this));
   },
@@ -62,18 +77,20 @@ var PhaserGenerator = generators.Base.extend({
     this.mkdir('assets');
     this.mkdir('css');
     this.mkdir('src');
-    this.template('_package.json', 'package.json');
+
+    this.template(this.srcDir + '_package.json', 'package.json');
   },
 
   projectfiles: function () {
     this.copy('gitignore', '.gitignore');
     this.copy('assets/preloader.gif', 'assets/preloader.gif');
     this.copy('css/main.css', 'css/main.css');
-    this.copy('src/boot.js', 'src/boot.js');
-    this.copy('src/game.js', 'src/game.js');
-    this.template('src/main.js', 'src/main.js');
-    this.copy('src/menu.js', 'src/menu.js');
-    this.copy('src/preloader.js', 'src/preloader.js');
+
+    this.copy(this.srcDir + 'boot.js', 'src/boot.js');
+    this.copy(this.srcDir + 'game.js', 'src/game.js');
+    this.template(this.srcDir + 'main.js', 'src/main.js');
+    this.copy(this.srcDir + 'menu.js', 'src/menu.js');
+    this.copy(this.srcDir + 'preloader.js', 'src/preloader.js');
 
     this.template('index.html', 'index.html');
   }
