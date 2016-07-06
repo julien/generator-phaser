@@ -69,16 +69,24 @@ var PhaserGenerator = generators.Base.extend({
       this.projectName = props.projectName || ' ';
       this.phaserBuild = props.phaserBuild || 'phaser.min.js';
       this.customBuild = this.phaserBuild.indexOf("custom/") !== -1 ? true : false;
-      this.srcDir = this.esVersion === 5 ? 'es5/' : 'es6/';
+      this.srcDir = 'es'+props.esVersion+'/';
+      this.esVersion = props.esVersion;
       done();
     }.bind(this));
   },
 
+  //save prompt answers to Yeoman config
+  config: function() {
+    this.config.set('projectName', this.projectName);
+    this.config.set('esVersion', this.esVersion);
+  },
+
   app: function () {
-    var mkdirp_err  = function (err) { if (err){ this.log(err); } }
-    mkdirp('assets', mkdirp_err);
-    mkdirp('css', mkdirp_err);
-    mkdirp('src', mkdirp_err);
+    var err_func  = function (err) { if (err){ this.log(err); } }
+    mkdirp('assets', err_func);
+    mkdirp('css', err_func);
+    mkdirp('src', err_func);
+    mkdirp('src/states', err_func);
 
     this.template(this.srcDir + '_package.json', 'package.json');
   },
@@ -88,11 +96,15 @@ var PhaserGenerator = generators.Base.extend({
     this.copy('assets/preloader.gif', 'assets/preloader.gif');
     this.copy('css/main.css', 'css/main.css');
 
-    this.copy(this.srcDir + 'boot.js', 'src/boot.js');
-    this.copy(this.srcDir + 'game.js', 'src/game.js');
+    this.copy(this.srcDir + 'boot.js', 'src/states/boot.js');
+    this.copy(this.srcDir + 'game.js', 'src/states/game.js');
+    this.copy(this.srcDir + 'menu.js', 'src/states/menu.js');
+    this.copy(this.srcDir + 'preloader.js', 'src/states/preloader.js');
+
+    //manually set the gameStates, as they are copied asyncronously and fs.readdir cannot see them be created in time.
+    //Also, we should be creating a new project and can accurately predict there will only be the default files there
+    this.gameStates = ["boot","game","menu","preloader"];
     this.template(this.srcDir + 'main.js', 'src/main.js');
-    this.copy(this.srcDir + 'menu.js', 'src/menu.js');
-    this.copy(this.srcDir + 'preloader.js', 'src/preloader.js');
 
     this.template('index.html', 'index.html');
   }
