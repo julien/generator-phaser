@@ -19,6 +19,7 @@ var StateGenerator = generators.Base.extend({
         type: 'input',
         name: 'stateName',
         message: 'What\'s the name of your new state?',
+        filter: function(input){return path.basename(input, '.js'); }, //remove the .js file extension if it is there
         validate: function(input) {
            if(input===""){
              return "State name cannot be empty";
@@ -35,9 +36,7 @@ var StateGenerator = generators.Base.extend({
     this.prompt(prompts, function (props) {
       //set global vars to prompt vars
       this.stateName = props.stateName;
-      this.log(this.esVersion);
-      this.log(this.projectName);
-      this.srcDir = this.esVersion === 5 ? 'es5/' : 'es6/';
+      this.srcDir = 'es'+this.esVersion+'/';
       done();
     }.bind(this));
   },

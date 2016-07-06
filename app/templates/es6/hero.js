@@ -1,11 +1,9 @@
-<% var up_state = stateName.charAt(0).toUpperCase() + stateName.slice(1); %>
-
 //Documentation for Phaser's (2.5.0) states:: phaser.io/docs/2.5.0/Phaser.State.html
-class <%= up_state %> extends Phaser.State {
+class Hero extends Phaser.Sprite {
 
   //initialization code in the constructor
   constructor(game, parent) {
-
+    Phaser.Sprite.call(this, game, x, y, 'hero', frame);
   }
 
   //Load operations (uses Loader), method called first
@@ -40,4 +38,4 @@ class <%= up_state %> extends Phaser.State {
 
 }
 
-export default <%= up_state %>;
+export default Hero;

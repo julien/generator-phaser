@@ -1,11 +1,10 @@
-<% var up_state = stateName.charAt(0).toUpperCase() + stateName.slice(1); %>
-
+<% var up_prefab = prefabName.charAt(0).toUpperCase() + prefabName.slice(1); %>
 //Documentation for Phaser's (2.5.0) states:: phaser.io/docs/2.5.0/Phaser.State.html
-class <%= up_state %> extends Phaser.State {
+class <%= up_prefab %> extends Phaser.TileSprite {
 
   //initialization code in the constructor
-  constructor(game, parent) {
-
+  constructor(game, x, y, width, height) {
+    Phaser.TileSprite.call(this, game, x, y, width, height, '<%= prefabName %>');
   }
 
   //Load operations (uses Loader), method called first
@@ -40,4 +39,4 @@ class <%= up_state %> extends Phaser.State {
 
 }
 
-export default <%= up_state %>;
+export default <%= up_prefab %>;

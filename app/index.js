@@ -87,6 +87,7 @@ var PhaserGenerator = generators.Base.extend({
     mkdirp('css', err_func);
     mkdirp('src', err_func);
     mkdirp('src/states', err_func);
+    mkdirp('src/prefabs',err_func);
 
     this.template(this.srcDir + '_package.json', 'package.json');
   },
@@ -100,6 +101,7 @@ var PhaserGenerator = generators.Base.extend({
     this.copy(this.srcDir + 'game.js', 'src/states/game.js');
     this.copy(this.srcDir + 'menu.js', 'src/states/menu.js');
     this.copy(this.srcDir + 'preloader.js', 'src/states/preloader.js');
+    this.copy(this.srcDir + 'hero.js', 'src/prefabs/hero.js');
 
     //manually set the gameStates, as they are copied asyncronously and fs.readdir cannot see them be created in time.
     //Also, we should be creating a new project and can accurately predict there will only be the default files there
