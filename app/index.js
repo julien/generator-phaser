@@ -3,6 +3,7 @@ var util = require('util');
 var path = require('path');
 var generators = require('yeoman-generator');
 var chalk = require('chalk');
+var mkdirp = require('mkdirp');
 var foldername = path.basename(process.cwd());
 
 var PhaserGenerator = generators.Base.extend({
@@ -74,9 +75,10 @@ var PhaserGenerator = generators.Base.extend({
   },
 
   app: function () {
-    this.mkdir('assets');
-    this.mkdir('css');
-    this.mkdir('src');
+    var mkdirp_err  = function (err) { if (err){ this.log(err); } }
+    mkdirp('assets', mkdirp_err);
+    mkdirp('css', mkdirp_err);
+    mkdirp('src', mkdirp_err);
 
     this.template(this.srcDir + '_package.json', 'package.json');
   },
