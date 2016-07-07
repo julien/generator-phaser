@@ -94,18 +94,38 @@ var PhaserGenerator = generators.Base.extend({
 
   projectfiles: function () {
     this.copy('gitignore', '.gitignore');
-    this.copy('assets/preloader.gif', 'assets/preloader.gif');
     this.copy('css/main.css', 'css/main.css');
 
+    //copy defualt game assets
+    this.copy('assets/preloader.gif', 'assets/preloader.gif');
+    this.copy('assets/bg_wood.png', 'assets/bg_wood.png');
+    this.copy('assets/crosshair_red_small.png', 'assets/crosshair_red_small.png');
+    this.copy('assets/target.png', 'assets/target.png');
+    this.copy('assets/text_gameover.png', 'assets/text_gameover.png');
+    this.copy('assets/text_go.png', 'assets/text_go.png');
+    this.copy('assets/text_ready.png', 'assets/text_ready.png');
+    this.copy('assets/text_score_small.png', 'assets/text_score_small.png');
+    this.copy('assets/ding.wav', 'assets/ding.wav');
+    this.copy('assets/gunshot.wav', 'assets/gunshot.wav');
+
+
+
+    //copy default game prefabs
+    if(this.esVersion === 6){ //did not bother making a game for ES5
+      this.copy(this.srcDir + 'target.js', 'src/prefabs/target.js');
+      this.copy(this.srcDir + 'crosshairs.js', 'src/prefabs/crosshairs.js');
+    }
+
+    //copy default game states
     this.copy(this.srcDir + 'boot.js', 'src/states/boot.js');
     this.copy(this.srcDir + 'game.js', 'src/states/game.js');
     this.copy(this.srcDir + 'menu.js', 'src/states/menu.js');
     this.copy(this.srcDir + 'preloader.js', 'src/states/preloader.js');
-    this.copy(this.srcDir + 'hero.js', 'src/prefabs/hero.js');
+    this.copy(this.srcDir + 'gameover.js', 'src/states/gameover.js');
 
     //manually set the gameStates, as they are copied asyncronously and fs.readdir cannot see them be created in time.
     //Also, we should be creating a new project and can accurately predict there will only be the default files there
-    this.gameStates = ["boot","game","menu","preloader"];
+    this.gameStates = ["boot","game","menu","preloader","gameover"];
     this.template(this.srcDir + 'main.js', 'src/main.js');
 
     this.template('index.html', 'index.html');

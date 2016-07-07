@@ -39,8 +39,4 @@ A [Yeoman](http://yeoman.io/) generator to generate HTML5 games with [phaser](ht
 
 + [Ben Alman](http://benalman.com/) for [Grunt](http://gruntjs.com/)
 
-
-
-
-
-
++ [Keney.nl](http://kenney.nl/assets/shooting-gallery) for the default game's images, [erkanozan](https://www.freesound.org/people/erkanozan/sounds/51749/) for gunshot audio,  [iut_Paris8](https://www.freesound.org/people/iut_Paris8/sounds/88243/) for 'ding' audio

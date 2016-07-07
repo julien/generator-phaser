@@ -4,7 +4,7 @@ class <%= up_prefab %> extends Phaser.Sprite {
 
   //initialization code in the constructor
   constructor(game, x, y, frame) {
-    Phaser.Sprite.call(this, game, x, y, '<%= prefabName %>', frame);
+    super(game, x, y, '<%= prefabName %>', frame);
   }
 
   //Load operations (uses Loader), method called first

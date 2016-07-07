@@ -4,7 +4,7 @@ class <%= up_prefab %> extends Phaser.TileSprite {
 
   //initialization code in the constructor
   constructor(game, x, y, width, height) {
-    Phaser.TileSprite.call(this, game, x, y, width, height, '<%= prefabName %>');
+    super(game, x, y, width, height, '<%= prefabName %>');
   }
 
   //Load operations (uses Loader), method called first
