@@ -19,6 +19,14 @@ A [Yeoman](http://yeoman.io/) generator to generate HTML5 games with [phaser](ht
 
   `yo phaser`
 
++ Invoke the state generator:
+
+  `yo phaser:state`
+
++ Invoke the prefab generator:
+
+  `yo phaser:prefab`
+
 + Run a local development server (livereload enabled) with this command:
 
   `npm start`
