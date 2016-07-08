@@ -1,7 +1,11 @@
 generator-phaser
 =================
 
-A [Yeoman](http://yeoman.io/) generator to generate HTML5 games with [phaser](http://phaser.io/).
+A [Yeoman](http://yeoman.io/) generator to create HTML5 games with [phaser](http://phaser.io/). This generator allows for the creation of Phaser source code made with best practices. The main generator (`yo phaser`) outputs a boilerplate or a full Phaser example game (if you so choose in an ES6 project). You can also generate new prefabs (`yo phaser:prefab`) or states (`yo phaser:state`) to add to your project.
+
+You can view your game and change it live in the browser by running `npm start` from your home directory (the web page will refresh as you save your files). It is recommended to view your game in Chrome, as it usually supports more features than FF or IE  (i.e. audio).
+
+When you are ready to publish, build your game with `npm run build` and view the output in the `build/` folder. The build process minifies and compresses individual files into one file for faster network downloading, and if you're developing an ES6 game [Babel](https://babeljs.io/) automatically outputs ES5 compatible code.
 
 **INSTRUCTIONS**
 
@@ -19,7 +23,7 @@ A [Yeoman](http://yeoman.io/) generator to generate HTML5 games with [phaser](ht
 
   `yo phaser`
 
-+ Invoke the state generator:
++ Invoke the state generator (Note: this updates & overwrites `main.js`):
 
   `yo phaser:state`
 
@@ -35,6 +39,9 @@ A [Yeoman](http://yeoman.io/) generator to generate HTML5 games with [phaser](ht
 
   `npm run build`
 
+**Notes**
+
+The game's `main.js` file will be updated with new states when you run the state generator. It adds in .js files found in the 'src/states/' directory.
 
 **CREDITS**
 
@@ -48,3 +55,5 @@ A [Yeoman](http://yeoman.io/) generator to generate HTML5 games with [phaser](ht
 + [Ben Alman](http://benalman.com/) for [Grunt](http://gruntjs.com/)
 
 + [Keney.nl](http://kenney.nl/assets/shooting-gallery) for the default game's images, [erkanozan](https://www.freesound.org/people/erkanozan/sounds/51749/) for gunshot audio,  [iut_Paris8](https://www.freesound.org/people/iut_Paris8/sounds/88243/) for 'ding' audio
+
++ All other repo contributors

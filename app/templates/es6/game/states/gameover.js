@@ -1,5 +1,9 @@
 class Menu extends Phaser.State {
 
+  constructor() {
+    super();
+  }
+
   create() {
     //add background image
     this.background = this.game.add.sprite(0,0,'background');
@@ -16,7 +20,7 @@ class Menu extends Phaser.State {
 
     //prevent accidental click-thru by not allowing state transition for a short time
     this.canContinueToNextState = false;
-    this.game.time.events.add(Phaser.Timer.SECOND * .2, function(){ this.canContinueToNextState = true; }, this);
+    this.game.time.events.add(Phaser.Timer.SECOND * .5, function(){ this.canContinueToNextState = true; }, this);
 
     this.saveVarsToLocalStorage();
     this.resetGlobalVariables();

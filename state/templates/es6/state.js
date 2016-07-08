@@ -5,7 +5,7 @@ class <%= up_state %> extends Phaser.State {
 
   //initialization code in the constructor
   constructor(game, parent) {
-
+    super(game,parent);
   }
 
   //Load operations (uses Loader), method called first

@@ -12,7 +12,7 @@ Gameover.prototype.create = function () {
 Gameover.prototype.update = function () {};
 
 Gameover.prototype.onInputDown = function () {
-  this.game.state.start('game');
+  this.game.state.start('menu');
 };
 
 module.exports = Gameover;

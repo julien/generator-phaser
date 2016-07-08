@@ -19,116 +19,136 @@ var PhaserGenerator = generators.Base.extend({
 
   askFor: function () {
     var done = this.async();
-
     this.log(chalk.magenta('... Phaser ...'));
 
-    var prompts = [{
-      type: 'input',
-      name: 'projectName',
-      message: 'What\'s the name of your application',
-      default: foldername
-    }, {
-      type: 'list',
-      name: 'phaserBuild',
-      message: 'Which version of Phaser do you want?',
-      choices: [
-        {
-          value: 'phaser.min.js',
-          name: 'Arcade Physics + P2 Physics (Default)'
+    const prompts = [
+      {
+        type: 'input',
+        name: 'projectName',
+        message: 'What\'s the name of your application',
+        default: foldername
+      }, {
+        type: 'list',
+        name: 'phaserBuild',
+        message: 'Which version of Phaser do you want?',
+        choices: [
+          {
+            value: 'phaser.min.js',
+            name: 'Arcade Physics + P2 Physics (Default)'
+          },
+          {
+            value: 'custom/phaser-arcade-physics.min.js',
+            name: 'Arcade Physics'
+          },
+          {
+            value: 'custom/phaser-ninja-physics.min.js',
+            name: 'Ninja Physics'
+          },
+          {
+            value: 'custom/phaser-no-physics.min.js',
+            name: 'No Physics'
+          }
+        ]
+      }, {
+        type: 'list',
+        name: 'esVersion',
+        message: 'Which ECMAScript version do you want to use?',
+        choices: [
+          {
+            value: 6,
+            name: 'ECMAScript 6/2015 (Default)'
+          },
+          {
+            value: 5,
+            name: 'ECMAScript 5'
+          }
+        ]
+      },
+      {
+        when: function(answers){
+          return answers.esVersion == 6;
         },
-        {
-          value: 'custom/phaser-arcade-physics.min.js',
-          name: 'Arcade Physics'
-        },
-        {
-          value: 'custom/phaser-ninja-physics.min.js',
-          name: 'Ninja Physics'
-        },
-        {
-          value: 'custom/phaser-no-physics.min.js',
-          name: 'No Physics'
-        }
-      ]
-    }, {
-      type: 'list',
-      name: 'esVersion',
-      message: 'Which ECMAScript version do you want to use?',
-      choices: [
-        {
-          value: 6,
-          name: 'ECMAScript 6/2015 (Default)'
-        },
-        {
-          value: 5,
-          name: 'ECMAScript 5'
-        }
-      ]
-    }];
+        type: 'list',
+        name: 'outputFullGame',
+        message: 'Output an example game or boilerplate code?',
+        choices: [
+          {
+            value: true,
+            name: 'Full game'
+          },
+          {
+            value: false,
+            name: 'Boilerplate'
+          }
+        ]
+      }
+    ];
 
-    this.prompt(prompts, function (props) {
-      this.projectName = props.projectName || ' ';
-      this.phaserBuild = props.phaserBuild || 'phaser.min.js';
-      this.customBuild = this.phaserBuild.indexOf("custom/") !== -1 ? true : false;
-      this.srcDir = 'es'+props.esVersion+'/';
-      this.esVersion = props.esVersion;
-      done();
-    }.bind(this));
+    this.prompt(prompts,function(answers){
+        this.projectName = answers.projectName || ' ';
+        this.phaserBuild = answers.phaserBuild || 'phaser.min.js';
+        this.customBuild = this.phaserBuild.indexOf("custom/") !== -1 ? true : false;
+        this.esVersion = answers.esVersion;
+        this.gameFolder = (answers.outputFullGame) ? 'game' : 'boilerplate';
+        this.esDirName = 'es'+this.esVersion;
+        done();
+      }.bind(this));
+
   },
 
   //save prompt answers to Yeoman config
   config: function() {
     this.config.set('projectName', this.projectName);
     this.config.set('esVersion', this.esVersion);
-  },
-
-  app: function () {
-    var err_func  = function (err) { if (err){ this.log(err); } }
-    mkdirp('assets', err_func);
-    mkdirp('css', err_func);
-    mkdirp('src', err_func);
-    mkdirp('src/states', err_func);
-    mkdirp('src/prefabs',err_func);
-
-    this.template(this.srcDir + '_package.json', 'package.json');
+    this.config.set('gameFolder', this.gameFolder);
   },
 
   projectfiles: function () {
-    this.copy('gitignore', '.gitignore');
-    this.copy('css/main.css', 'css/main.css');
+    const gameSrcPath = path.join(this.esDirName,this.gameFolder);
+    const assetDirPath = path.join('assets',this.gameFolder);
 
-    //copy defualt game assets
-    this.copy('assets/preloader.gif', 'assets/preloader.gif');
-    this.copy('assets/bg_wood.png', 'assets/bg_wood.png');
-    this.copy('assets/crosshair_red_small.png', 'assets/crosshair_red_small.png');
-    this.copy('assets/target.png', 'assets/target.png');
-    this.copy('assets/text_gameover.png', 'assets/text_gameover.png');
-    this.copy('assets/text_go.png', 'assets/text_go.png');
-    this.copy('assets/text_ready.png', 'assets/text_ready.png');
-    this.copy('assets/text_score_small.png', 'assets/text_score_small.png');
-    this.copy('assets/ding.wav', 'assets/ding.wav');
-    this.copy('assets/gunshot.wav', 'assets/gunshot.wav');
+    this.fs.copy(
+      this.templatePath('gitignore'),
+      this.destinationPath('.gitignore'),
+      this
+    );
 
+    this.fs.copyTpl(
+      this.templatePath('index.html'),
+      this.destinationPath('index.html'),
+      this
+    );
 
+    this.fs.copy(
+      this.templatePath('css'),
+      this.destinationPath('css'),
+      this
+    );
 
-    //copy default game prefabs
-    if(this.esVersion === 6){ //did not bother making a game for ES5
-      this.copy(this.srcDir + 'target.js', 'src/prefabs/target.js');
-      this.copy(this.srcDir + 'crosshairs.js', 'src/prefabs/crosshairs.js');
-    }
+    this.fs.copy(
+      this.templatePath(assetDirPath),
+      this.destinationPath('assets'),
+      this
+    );
 
-    //copy default game states
-    this.copy(this.srcDir + 'boot.js', 'src/states/boot.js');
-    this.copy(this.srcDir + 'game.js', 'src/states/game.js');
-    this.copy(this.srcDir + 'menu.js', 'src/states/menu.js');
-    this.copy(this.srcDir + 'preloader.js', 'src/states/preloader.js');
-    this.copy(this.srcDir + 'gameover.js', 'src/states/gameover.js');
+    this.fs.copy(
+      this.templatePath(gameSrcPath),
+      this.destinationPath('src'),
+      this
+    );
 
-    //manually set the gameStates, as they are copied asyncronously and fs.readdir cannot see them be created in time.
-    //Also, we should be creating a new project and can accurately predict there will only be the default files there
+    this.fs.copyTpl(
+      this.templatePath(path.join(this.esDirName,'_package.json')),
+      this.destinationPath('package.json'),
+      this
+    );
+
     this.gameStates = ["boot","game","menu","preloader","gameover"];
-    this.template(this.srcDir + 'main.js', 'src/main.js');
-
-    this.template('index.html', 'index.html');
+    this.fs.copyTpl(
+      this.templatePath(path.join(this.esDirName,'main.js')),
+      this.destinationPath(path.join('src','main.js')),
+      this
+    );
   }
 });
 

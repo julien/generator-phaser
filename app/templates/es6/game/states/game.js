@@ -3,6 +3,10 @@ import Target from '../prefabs/target';
 
 class Game extends Phaser.State {
 
+  constructor() {
+    super();
+  }
+  
   create() {
     //add background image
     this.background = this.game.add.sprite(0,0,'background');

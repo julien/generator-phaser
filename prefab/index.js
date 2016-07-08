@@ -54,13 +54,18 @@ var PrefabGenerator = generators.Base.extend({
       //set global vars to prompt vars
       this.prefabType = props.prefabType;
       this.prefabName = props.prefabName;
-      this.srcDir = 'es'+this.esVersion+'/';
       done();
     }.bind(this));
   },
 
   projectfiles: function () {
-    this.template(this.srcDir + this.prefabType + '.js', 'src/prefabs/' + this.prefabName + '.js');
+    const esDirName = 'es'+this.esVersion;
+
+    this.fs.copyTpl(
+      this.templatePath(path.join(esDirName,this.prefabName+'.js')),
+      this.destinationPath(path.join('src','states',this.prefabName+'.js')),
+      this
+    );
   }
 });
 

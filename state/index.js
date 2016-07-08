@@ -36,12 +36,13 @@ var StateGenerator = generators.Base.extend({
     this.prompt(prompts, function (props) {
       //set global vars to prompt vars
       this.stateName = props.stateName;
-      this.srcDir = 'es'+this.esVersion+'/';
       done();
     }.bind(this));
   },
 
   projectfiles: function () {
+    const esDirName = 'es'+this.esVersion;
+
     // Create a list of all files in the 'src/states' folder
     this.gameStates = fs.readdirSync("src/states/");
     //strip the '.js' extension from the end of the filename
@@ -52,8 +53,16 @@ var StateGenerator = generators.Base.extend({
     this.gameStates.push(this.stateName);
 
     //create the new state and rebuild 'main.js' with the new state
-    this.template(this.srcDir + 'state.js', 'src/states/' + this.stateName + '.js');
-    this.template('../../app/templates/'+this.srcDir+'main.js', 'src/main.js'); // use the main.js in the original generator
+    this.fs.copyTpl(
+      this.templatePath(path.join(esDirName,'state.js')),
+      this.destinationPath(path.join('src','states',this.stateName+'.js')),
+      this
+    );
+    this.fs.copyTpl(
+      this.templatePath(path.join("..","..","app","templates",esDirName,'main.js')),
+      this.destinationPath('main.js'),
+      this
+    );
   }
 });
 
