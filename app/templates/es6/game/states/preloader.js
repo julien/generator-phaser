@@ -21,7 +21,6 @@ class Preloader extends Phaser.State {
     this.game.load.image('crosshairs', 'assets/crosshair_red_small.png');
     this.game.load.image('text_go', 'assets/text_go.png');
     this.game.load.image('text_ready', 'assets/text_ready.png');
-    this.game.load.image('text_score', 'assets/text_score_small.png');
 
     this.game.load.spritesheet('target', 'assets/target.png',128.66,128);
 
