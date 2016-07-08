@@ -1,11 +1,11 @@
 generator-phaser
 =================
 
-A [Yeoman](http://yeoman.io/) generator to create HTML5 games with [phaser](http://phaser.io/). This generator allows for the creation of Phaser source code made with best practices. The main generator (`yo phaser`) outputs a boilerplate or a full Phaser example game (if you so choose in an ES6 project). You can also generate new prefabs (`yo phaser:prefab`) or states (`yo phaser:state`) to add to your project.
+A [Yeoman](http://yeoman.io/) generator to create HTML5 games with [phaser](http://phaser.io/). This generator allows for the creation of Phaser source code made with best practices. The main generator (`yo phaser`) outputs a basic game's structure or a full Phaser game (if you so choose in an ES6 project). You can also generate new prefabs (`yo phaser:prefab`) or states (`yo phaser:state`) to add to your project.
 
-You can view your game and change it live in the browser by running `npm start` from your home directory (the web page will refresh as you save your files). It is recommended to view your game in Chrome, as it usually supports more features than FF or IE  (i.e. audio).
+You can view your game in the browser by running `npm start` from your home directory and the web page will refresh as you save your files. It is recommended to view your game in Chrome, as it usually supports more features than FF or IE  (i.e. audio).
 
-When you are ready to publish, build your game with `npm run build` and view the output in the `build/` folder. The build process minifies and compresses individual files into one file for faster network downloading, and if you're developing an ES6 game [Babel](https://babeljs.io/) automatically outputs ES5 compatible code.
+When you are ready to publish, build your game with `npm run build` and view the output in the `build/` folder. The build process minifies and compresses individual files into one file for faster network downloading, and if you're developing an ES6 game, it automatically outputs ES5 compatible code using [Babel](https://babeljs.io/).
 
 **INSTRUCTIONS**
 
