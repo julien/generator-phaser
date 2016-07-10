@@ -62,8 +62,8 @@ var PrefabGenerator = generators.Base.extend({
     const esDirName = 'es'+this.esVersion;
 
     this.fs.copyTpl(
-      this.templatePath(path.join(esDirName,this.prefabName+'.js')),
-      this.destinationPath(path.join('src','states',this.prefabName+'.js')),
+      this.templatePath(path.join(esDirName,this.prefabType+'.js')),
+      this.destinationPath(path.join('src','prefabs',this.prefabName+'.js')),
       this
     );
   }

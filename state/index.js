@@ -60,7 +60,7 @@ var StateGenerator = generators.Base.extend({
     );
     this.fs.copyTpl(
       this.templatePath(path.join("..","..","app","templates",esDirName,'main.js')),
-      this.destinationPath('main.js'),
+      this.destinationPath('src','main.js'),
       this
     );
   }
