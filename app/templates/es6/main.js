@@ -1,11 +1,18 @@
-import Boot from './boot';
-import Game from './game';
-import Menu from './menu';
-import Preloader from './preloader';
+<% //loop over the game states and make a 'import' statement for each one
+for(var i=0;i<gameStates.length;i++){
+  var state = gameStates[i]
+  var up_state = state.charAt(0).toUpperCase() + state.slice(1);
 
-const game = new Phaser.Game(640, 480, Phaser.AUTO, '<%= projectName %>-game');
-game.state.add('boot', new Boot());
-game.state.add('preloader', new Preloader());
-game.state.add('menu', new Menu());
-game.state.add('game', new Game());
+%> import <%= up_state %> from './states/<%= state %>';
+<% } %>
+
+const game = new Phaser.Game(window.innerWidth, window.innerHeight, Phaser.AUTO, '<%= projectName %>-game');
+
+<% //loop over the game states and make a 'game.state.add' statement for each one
+for(var i=0;i<gameStates.length;i++){
+  var state = gameStates[i];
+  var up_state = state.charAt(0).toUpperCase() + state.slice(1);
+
+%> game.state.add('<%= state %>', new <%= up_state %>());
+<% } %>
 game.state.start('boot');

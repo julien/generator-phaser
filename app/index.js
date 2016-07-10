@@ -3,6 +3,7 @@ var util = require('util');
 var path = require('path');
 var generators = require('yeoman-generator');
 var chalk = require('chalk');
+var mkdirp = require('mkdirp');
 var foldername = path.basename(process.cwd());
 
 var PhaserGenerator = generators.Base.extend({
@@ -18,81 +19,136 @@ var PhaserGenerator = generators.Base.extend({
 
   askFor: function () {
     var done = this.async();
-
     this.log(chalk.magenta('... Phaser ...'));
 
-    var prompts = [{
-      type: 'input',
-      name: 'projectName',
-      message: 'What\'s the name of your application',
-      default: foldername
-    }, {
-      type: 'list',
-      name: 'phaserBuild',
-      message: 'Which version of Phaser do you want?',
-      choices: [
-        {
-          value: 'phaser.min.js',
-          name: 'Arcade Physics + P2 Physics (Default)'
+    const prompts = [
+      {
+        type: 'input',
+        name: 'projectName',
+        message: 'What\'s the name of your application',
+        default: foldername
+      }, {
+        type: 'list',
+        name: 'phaserBuild',
+        message: 'Which version of Phaser do you want?',
+        choices: [
+          {
+            value: 'phaser.min.js',
+            name: 'Arcade Physics + P2 Physics (Default)'
+          },
+          {
+            value: 'custom/phaser-arcade-physics.min.js',
+            name: 'Arcade Physics'
+          },
+          {
+            value: 'custom/phaser-ninja-physics.min.js',
+            name: 'Ninja Physics'
+          },
+          {
+            value: 'custom/phaser-no-physics.min.js',
+            name: 'No Physics'
+          }
+        ]
+      }, {
+        type: 'list',
+        name: 'esVersion',
+        message: 'Which ECMAScript version do you want to use?',
+        choices: [
+          {
+            value: 6,
+            name: 'ECMAScript 6/2015 (Default)'
+          },
+          {
+            value: 5,
+            name: 'ECMAScript 5'
+          }
+        ]
+      },
+      {
+        when: function(answers){
+          return answers.esVersion == 6;
         },
-        {
-          value: 'custom/phaser-arcade-physics.min.js',
-          name: 'Arcade Physics'
-        },
-        {
-          value: 'custom/phaser-ninja-physics.min.js',
-          name: 'Ninja Physics'
-        },
-        {
-          value: 'custom/phaser-no-physics.min.js',
-          name: 'No Physics'
-        }
-      ]
-    }, {
-      type: 'list',
-      name: 'esVersion',
-      message: 'Which ECMAScript version do you want to use?',
-      choices: [
-        {
-          value: 6,
-          name: 'ECMAScript 6/2015 (Default)'
-        },
-        {
-          value: 5,
-          name: 'ECMAScript 5'
-        }
-      ]
-    }];
+        type: 'list',
+        name: 'outputFullGame',
+        message: 'Output an example game or boilerplate code?',
+        choices: [
+          {
+            value: true,
+            name: 'Full game'
+          },
+          {
+            value: false,
+            name: 'Boilerplate'
+          }
+        ]
+      }
+    ];
 
-    this.prompt(prompts, function (props) {
-      this.projectName = props.projectName || ' ';
-      this.phaserBuild = props.phaserBuild || 'phaser.min.js';
-      this.customBuild = this.phaserBuild.indexOf("custom/") !== -1 ? true : false;
-      this.srcDir = this.esVersion === 5 ? 'es5/' : 'es6/';
-      done();
-    }.bind(this));
+    this.prompt(prompts,function(answers){
+        this.projectName = answers.projectName || ' ';
+        this.phaserBuild = answers.phaserBuild || 'phaser.min.js';
+        this.customBuild = this.phaserBuild.indexOf("custom/") !== -1 ? true : false;
+        this.esVersion = answers.esVersion;
+        this.gameFolder = (answers.outputFullGame) ? 'game' : 'boilerplate';
+        this.esDirName = 'es'+this.esVersion;
+        done();
+      }.bind(this));
+
   },
 
-  app: function () {
-    this.mkdir('assets');
-    this.mkdir('css');
-    this.mkdir('src');
-
-    this.template(this.srcDir + '_package.json', 'package.json');
+  //save prompt answers to Yeoman config
+  config: function() {
+    this.config.set('projectName', this.projectName);
+    this.config.set('esVersion', this.esVersion);
+    this.config.set('gameFolder', this.gameFolder);
   },
 
   projectfiles: function () {
-    this.copy('gitignore', '.gitignore');
-    this.copy('assets/preloader.gif', 'assets/preloader.gif');
-    this.copy('css/main.css', 'css/main.css');
+    const gameSrcPath = path.join(this.esDirName,this.gameFolder);
+    const assetDirPath = path.join('assets',this.gameFolder);
 
-    this.copy(this.srcDir + 'boot.js', 'src/boot.js');
-    this.copy(this.srcDir + 'game.js', 'src/game.js');
-    this.template(this.srcDir + 'main.js', 'src/main.js');
-    this.copy(this.srcDir + 'menu.js', 'src/menu.js');
-    this.copy(this.srcDir + 'preloader.js', 'src/preloader.js');
+    this.fs.copy(
+      this.templatePath('gitignore'),
+      this.destinationPath('.gitignore'),
+      this
+    );
 
-    this.template('index.html', 'index.html');
+    this.fs.copyTpl(
+      this.templatePath('index.html'),
+      this.destinationPath('index.html'),
+      this
+    );
+
+    this.fs.copy(
+      this.templatePath('css'),
+      this.destinationPath('css'),
+      this
+    );
+
+    this.fs.copy(
+      this.templatePath(assetDirPath),
+      this.destinationPath('assets'),
+      this
+    );
+
+    this.fs.copy(
+      this.templatePath(gameSrcPath),
+      this.destinationPath('src'),
+      this
+    );
+
+    this.fs.copyTpl(
+      this.templatePath(path.join(this.esDirName,'_package.json')),
+      this.destinationPath('package.json'),
+      this
+    );
+
+    this.gameStates = ["boot","game","menu","preloader","gameover"];
+    this.fs.copyTpl(
+      this.templatePath(path.join(this.esDirName,'main.js')),
+      this.destinationPath(path.join('src','main.js')),
+      this
+    );
   }
 });
 
