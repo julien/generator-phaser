@@ -7,14 +7,13 @@ var mkdirp = require('mkdirp');
 var foldername = path.basename(process.cwd());
 
 var PhaserGenerator = generators.Base.extend({
+
   init: function () {
     this.pkg = require('../package.json');
+  },
 
-    this.on('end', function () {
-      if (!this.options['skip-install']) {
-        this.installDependencies({bower: false, npm: true});
-      }
-    });
+  install: function () {
+    this.installDependencies({bower: false});
   },
 
   askFor: function () {
@@ -65,8 +64,8 @@ var PhaserGenerator = generators.Base.extend({
         ]
       },
       {
-        when: function(answers){
-          return answers.esVersion == 6;
+        when: function (answers) {
+          return answers.esVersion === 6;
         },
         type: 'list',
         name: 'outputFullGame',
@@ -84,28 +83,28 @@ var PhaserGenerator = generators.Base.extend({
       }
     ];
 
-    this.prompt(prompts,function(answers){
-        this.projectName = answers.projectName || ' ';
-        this.phaserBuild = answers.phaserBuild || 'phaser.min.js';
-        this.customBuild = this.phaserBuild.indexOf("custom/") !== -1 ? true : false;
+    this.prompt(prompts, function (answers) {
+        this.projectName = answers.projectName ? answers.projectName : ' ';
+        this.phaserBuild = answers.phaserBuild ? answers.phaserBuild : 'phaser.min.js';
+        this.customBuild = !!(this.phaserBuild.indexOf("custom/") !== -1);
         this.esVersion = answers.esVersion;
-        this.gameFolder = (answers.outputFullGame) ? 'game' : 'boilerplate';
-        this.esDirName = 'es'+this.esVersion;
+        this.gameFolder = answers.outputFullGame ? 'game' : 'boilerplate';
+        this.esDirName = 'es' + this.esVersion;
         done();
       }.bind(this));
 
   },
 
-  //save prompt answers to Yeoman config
-  config: function() {
+  // save prompt answers to Yeoman config
+  config: function () {
     this.config.set('projectName', this.projectName);
     this.config.set('esVersion', this.esVersion);
     this.config.set('gameFolder', this.gameFolder);
   },
 
   projectfiles: function () {
-    const gameSrcPath = path.join(this.esDirName,this.gameFolder);
-    const assetDirPath = path.join('assets',this.gameFolder);
+    const gameSrcPath = path.join(this.esDirName, this.gameFolder);
+    const assetDirPath = path.join('assets', this.gameFolder);
 
     this.fs.copy(
       this.templatePath('gitignore'),
@@ -138,15 +137,15 @@ var PhaserGenerator = generators.Base.extend({
     );
 
     this.fs.copyTpl(
-      this.templatePath(path.join(this.esDirName,'_package.json')),
+      this.templatePath(path.join(this.esDirName, '_package.json')),
       this.destinationPath('package.json'),
       this
     );
 
-    this.gameStates = ["boot","game","menu","preloader","gameover"];
+    this.gameStates = ['boot', 'game', 'menu', 'preloader', 'gameover'];
     this.fs.copyTpl(
-      this.templatePath(path.join(this.esDirName,'main.js')),
-      this.destinationPath(path.join('src','main.js')),
+      this.templatePath(path.join(this.esDirName, 'main.js')),
+      this.destinationPath(path.join('src', 'main.js')),
       this
     );
   }
