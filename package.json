@@ -15,7 +15,9 @@
     "url": "https://github.com/julien"
   },
   "files": [
-    "app"
+    "app",
+    "state",
+    "prefab"
   ],
   "repository": {
     "type": "git",
