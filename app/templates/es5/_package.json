@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "start":       "budo src/main.js:bundle.js --live",
-    "prebuild":    "mkdir -p build<% if (customBuild) {%> && mkdir -p build/custom <%}%>",
+    "prebuild":    "mkdirp build<% if (customBuild) {%> && mkdirp build/custom <%}%>",
     "build":       "npm run build:js && npm run build:css && npm run build:html && npm run copy:all",
     "build:js":    "browserify src/main.js | uglifyjs -cm > build/bundle.min.js",
     "build:css":   "cleancss css/main.css -o build/main.min.css",
@@ -24,6 +24,7 @@
     "budo": "^8.0.4",
     "clean-css": "^3.4.9",
     "htmlprocessor": "^0.2.3",
+    "mkdirp": "^0.5.1",
     "uglify-js": "^2.6.2"
   }
 }

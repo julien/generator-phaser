@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "start":       "budo src/main.js:bundle.js --live -- -d -e src/main.js -t [babelify --comments false --presets es2015]",
-    "prebuild":    "mkdir -p build",
+    "prebuild":    "mkdirp build",
     "build":       "npm run build:js && npm run build:css && npm run build:html && npm run copy:all",
     "build:js":    "browserify -d -e src/main.js -t [babelify --comments false --presets es2015] | uglifyjs -cm > build/bundle.min.js",
     "build:css":   "cleancss css/main.css -o build/main.min.css",
@@ -28,6 +28,7 @@
     "budo": "^8.3.0",
     "clean-css": "^3.4.17",
     "htmlprocessor": "^0.2.3",
+    "mkdirp": "^0.5.1",
     "uglify-js": "^2.6.2"
   }
 }
