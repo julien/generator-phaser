@@ -1,5 +1,5 @@
 <% var up_prefab = prefabName.charAt(0).toUpperCase() + prefabName.slice(1); %>
-//Documentation for Phaser's (2.5.0) states:: phaser.io/docs/2.5.0/Phaser.State.html
+//Documentation for Phaser's (2.5.0) group:: phaser.io/docs/2.5.0/Phaser.Group.html
 class <%= up_prefab %> extends Phaser.Group {
 
   //initialization code in the constructor
