@@ -20,15 +20,15 @@ class Menu extends Phaser.State {
 
     //prevent accidental click-thru by not allowing state transition for a short time
     this.canContinueToNextState = false;
-    this.game.time.events.add(Phaser.Timer.SECOND * .5, function(){ this.canContinueToNextState = true; }, this);
+    this.game.time.events.add(Phaser.Timer.SECOND * 0.5, function(){ this.canContinueToNextState = true; }, this);
 
     this.saveVarsToLocalStorage();
     this.resetGlobalVariables();
   }
 
   saveVarsToLocalStorage(){
-    var max = localStorage["maxScore"] || 0; //default value of 0 is it does not exist
-    if (this.game.global.score > max){ localStorage["maxScore"] = this.game.global.score; }
+    var max = localStorage.maxScore || 0; //default value of 0 is it does not exist
+    if (this.game.global.score > max){ localStorage.maxScore = this.game.global.score; }
   }
 
   resetGlobalVariables(){

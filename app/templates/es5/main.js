@@ -4,6 +4,6 @@ const game = new Phaser.Game(window.innerWidth, window.innerHeight, Phaser.AUTO,
 for(var i=0;i<gameStates.length;i++){
   var state = gameStates[i];
 
-%> game.state.add('<%= state %>', require('./states/<%= state %>'));
+%>game.state.add('<%= state %>', require('./states/<%= state %>'));
 <% } %>
 game.state.start('boot');

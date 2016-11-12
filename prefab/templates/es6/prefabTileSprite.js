@@ -1,5 +1,5 @@
 <% var up_prefab = prefabName.charAt(0).toUpperCase() + prefabName.slice(1); %>
-//Documentation for Phaser's (2.5.0) states:: phaser.io/docs/2.5.0/Phaser.State.html
+//Documentation for Phaser's (2.6.2) tile sprites:: phaser.io/docs/2.6.2/Phaser.TileSprite.html
 class <%= up_prefab %> extends Phaser.TileSprite {
 
   //initialization code in the constructor
