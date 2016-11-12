@@ -1,6 +1,6 @@
 <% var up_state = stateName.charAt(0).toUpperCase() + stateName.slice(1); %>
 
-//Documentation for Phaser's (2.5.0) states:: phaser.io/docs/2.5.0/Phaser.State.html
+//Documentation for Phaser's (2.6.2) states:: phaser.io/docs/2.6.2/Phaser.State.html
 class <%= up_state %> extends Phaser.State {
 
   //initialization code in the constructor

@@ -41,7 +41,7 @@ class Menu extends Phaser.State {
     this.menuText.visible = false;
     this.go.angle = -15;
 
-    //create some tweens - http://phaser.io/docs/2.5.0/Phaser.Tween.html#to
+    //create some tweens - http://phaser.io/docs/2.6.2/Phaser.Tween.html#to
     const ready_tween = this.game.add.tween(this.ready.scale)
       .to({ x: 1.5, y: 1.5}, 500, Phaser.Easing.Linear.In,false,0,-1,true);
 
