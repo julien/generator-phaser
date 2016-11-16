@@ -34,6 +34,10 @@ var PrefabGenerator = generators.Base.extend({
         {
           value: 'prefabEmitter',
           name: 'prefabEmitter'
+        },
+        {
+          value: 'prefabText',
+          name: 'prefabText'
         }
       ]
     }, {
