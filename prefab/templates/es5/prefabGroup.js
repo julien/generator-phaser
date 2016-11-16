@@ -6,7 +6,7 @@
 
   // prefab initialization and construction
 <%= up_prefab %>.prototype.constructor = function(game, parent) {
-  Phaser.Sprite.call(this, game, parent);
+  Phaser.Group.call(this, game, parent);
 
 };
 
