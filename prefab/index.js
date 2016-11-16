@@ -30,6 +30,14 @@ var PrefabGenerator = generators.Base.extend({
         {
           value: 'prefabTileSprite',
           name: 'prefabTileSprite'
+        },
+        {
+          value: 'prefabEmitter',
+          name: 'prefabEmitter'
+        },
+        {
+          value: 'prefabText',
+          name: 'prefabText'
         }
       ]
     }, {
