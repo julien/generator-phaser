@@ -1,6 +1,7 @@
 <% var up_prefab = prefabName.charAt(0).toUpperCase() + prefabName.slice(1); %>
 'use strict';
 
+//Documentation for Phaser's (2.6.2) tile sprites:: phaser.io/docs/2.6.2/Phaser.TileSprite.html
 <%= up_prefab %>.prototype = Object.create(Phaser.TileSprite.prototype);
 
   // prefab initialization and construction
