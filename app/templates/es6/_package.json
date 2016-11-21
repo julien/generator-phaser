@@ -10,8 +10,8 @@
     "build:css":   "cleancss css/main.css -o build/main.min.css",
     "build:html":  "htmlprocessor index.html -o build/index.html",
     "copy:all":    "npm run copy:assets && npm run copy:phaser",
-    "copy:assets": "ncp -rf assets build/",
-    "copy:phaser": "ncp -rf node_modules/phaser/build/phaser.min.js build/phaser.min.js"
+    "copy:assets": "ncp assets build/",
+    "copy:phaser": "ncp node_modules/phaser/build/phaser.min.js build/phaser.min.js"
   },
   "keywords": [],
   "author": "",
