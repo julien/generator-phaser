@@ -30,6 +30,10 @@ When you are ready to publish, build your game with `npm run build` and view the
 + Invoke the prefab generator:
 
   `yo phaser:prefab`
+  
++ Invoke the shader generator:
+
+  `yo phaser:shader`
 
 + Run a local development server (livereload enabled) with this command:
 
