@@ -14,7 +14,7 @@ Boot.prototype.create = function () {
     this.game.scale.maxWidth = 640;
     this.game.scale.maxHeight = 480;
     this.game.scale.forceOrientation(true);
-    this.game.scale.setScreenSize(true);
+    this.game.scale.setSize();
   }
   this.game.state.start('preloader');
 };
