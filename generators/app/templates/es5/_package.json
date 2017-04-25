@@ -20,9 +20,9 @@
     "phaser": "^2.6.2"
   },
   "devDependencies": {
-    "browserify": "^13.0.0",
-    "budo": "^8.0.4",
-    "clean-css": "^3.4.9",
+    "browserify": "^14.3.0",
+    "budo": "^10.0.3",
+    "clean-css": "^3.4.17",
     "htmlprocessor": "^0.2.3",
     "mkdirp": "^0.5.1",
     "ncp": "^2.0.0",
