@@ -4,7 +4,6 @@ var generators = require('yeoman-generator');
 var fs = require('fs');
 var path = require('path');
 
-
 var ShaderGenerator = generators.Base.extend({
   init: function() {
     this.log('Creating a new Shader.');

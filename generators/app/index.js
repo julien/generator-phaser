@@ -1,23 +1,24 @@
 'use strict';
-var util = require('util');
-var path = require('path');
-var generators = require('yeoman-generator');
-var chalk = require('chalk');
-var mkdirp = require('mkdirp');
-var foldername = path.basename(process.cwd());
 
-var PhaserGenerator = generators.Base.extend({
+const util = require('util');
+const path = require('path');
+const generators = require('yeoman-generator');
+const chalk = require('chalk');
+const mkdirp = require('mkdirp');
+const foldername = path.basename(process.cwd());
 
-  init: function () {
+const PhaserGenerator = generators.Base.extend({
+
+  init() {
     this.pkg = require('../package.json');
   },
 
-  install: function () {
+  install() {
     this.installDependencies({bower: false});
   },
 
   askFor: function () {
-    var done = this.async();
+    const done = this.async();
     this.log(chalk.magenta('... Phaser ...'));
 
     const prompts = [
@@ -84,14 +85,14 @@ var PhaserGenerator = generators.Base.extend({
     ];
 
     this.prompt(prompts, function (answers) {
-        this.projectName = answers.projectName ? answers.projectName : ' ';
-        this.phaserBuild = answers.phaserBuild ? answers.phaserBuild : 'phaser.min.js';
-        this.customBuild = !!(this.phaserBuild.indexOf("custom/") !== -1);
-        this.esVersion = answers.esVersion;
-        this.gameFolder = answers.outputFullGame ? 'game' : 'boilerplate';
-        this.esDirName = 'es' + this.esVersion;
-        done();
-      }.bind(this));
+      this.projectName = answers.projectName ? answers.projectName : ' ';
+      this.phaserBuild = answers.phaserBuild ? answers.phaserBuild : 'phaser.min.js';
+      this.customBuild = !!(this.phaserBuild.indexOf("custom/") !== -1);
+      this.esVersion = answers.esVersion;
+      this.gameFolder = answers.outputFullGame ? 'game' : 'boilerplate';
+      this.esDirName = 'es' + this.esVersion;
+      done();
+    }.bind(this));
 
   },
 
