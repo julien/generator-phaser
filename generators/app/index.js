@@ -9,8 +9,6 @@ module.exports = class extends Generator {
 
   constructor(arg, opts) {
     super(arg, opts);
-
-    console.log('opts', opts['skip-install']);
   }
 
   initializing() {
@@ -146,7 +144,6 @@ module.exports = class extends Generator {
   }
 
   install() {
-    console.log('this', this.opts['skip-install']);
     this.installDependencies({bower: false});
   }
 
