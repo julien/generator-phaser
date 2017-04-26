@@ -1,47 +1,37 @@
-/*global describe, beforeEach, it */
-'use strict';
-var path = require('path');
-var helpers = require('yeoman-test');
+const helpers = require('yeoman-test');
+const assert = require('yeoman-assert');
+const fs = require('fs-extra');
+const path = require('path');
 
-describe('yo:phaser', function () {
-  beforeEach(function (done) {
-    helpers.testDirectory(path.join(__dirname, 'temp'), function (err) {
-      if (err) {
-        return done(err);
-      }
+describe('yo:phaser', () => {
 
-      this.app = helpers.createGenerator('phaser:app', [
-        '../../generators/app'
-      ], null, {'skip-install': true});
-      done();
-    }.bind(this));
+  let tmpdir;
+
+  beforeEach(() => {
+    return helpers.run(path.join(__dirname, '../generators/app'))
+      .inTmpDir(dir => {
+        tmpdir = dir;
+      })
+      .withOptions({projectName: 'temp'})
   });
 
-  xit('creates expected files', function (done) {
-    var expected = [
+  it('creates expected files', () => {
+    const expected = [
       // add files you expect to exist here.
-
       '.gitignore',
-      'package.json',
       'assets/preloader.gif',
       'css/main.css',
       'index.html',
-      'src/boot.js',
-      'src/game.js',
+      'package.json',
       'src/main.js',
-      'src/menu.js',
-      'src/preloader.js'
-
+      'src/states/boot.js',
+      'src/states/game.js',
+      'src/states/menu.js',
+      'src/states/preloader.js'
     ];
 
-    helpers.run(this.app, {
-      'projectName': 'temp'
-    });
-
-    this.app.on('ready', () => {
-      done();
-    })
-
-
+    for (let i = 0, l = expected.length; i < l; i++) {
+      assert.file(path.join(tmpdir, expected[i]));
+    }
   });
 });
