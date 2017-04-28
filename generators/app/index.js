@@ -7,10 +7,6 @@ const foldername = path.basename(process.cwd());
 
 module.exports = class extends Generator {
 
-  constructor(arg, opts) {
-    super(arg, opts);
-  }
-
   initializing() {
     this.pkg = require('../../package.json');
   }
@@ -144,9 +140,10 @@ module.exports = class extends Generator {
   }
 
   install() {
-    this.installDependencies({bower: false});
+    if (this.options.skipInstall === true) {
+      this.installDependencies({bower: false});
+    }
   }
 
-  // end() { }
 }
 

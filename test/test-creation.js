@@ -1,21 +1,27 @@
 const helpers = require('yeoman-test');
 const assert = require('yeoman-assert');
-const fs = require('fs-extra');
+const fs = require('fs');
+const fsextra = require('fs-extra');
 const path = require('path');
+
+const basedir = path.join(__dirname, '../generators/app');
 
 describe('yo:phaser', () => {
 
   let tmpdir;
 
   beforeEach(() => {
-    return helpers.run(path.join(__dirname, '../generators/app'))
+    return helpers.run(basedir)
       .inTmpDir(dir => {
         tmpdir = dir;
       })
       .withOptions({projectName: 'temp'})
   });
 
+  afterEach(() => fsextra.remove(tmpdir));
+
   it('creates expected files', () => {
+
     const expected = [
       // add files you expect to exist here.
       '.gitignore',
@@ -30,8 +36,7 @@ describe('yo:phaser', () => {
       'src/states/preloader.js'
     ];
 
-    for (let i = 0, l = expected.length; i < l; i++) {
-      assert.file(path.join(tmpdir, expected[i]));
-    }
+    const files = expected.map(i => path.join(tmpdir, i));
+    assert.file(files);
   });
 });
