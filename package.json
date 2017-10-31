@@ -27,7 +27,9 @@
   },
   "devDependencies": {
     "fs-extra": "2.1.2",
-    "mocha": "*"
+    "mocha": "^4.0.1",
+    "yeoman-assert": "^3.1.0",
+    "yeoman-test": "^1.7.0"
   },
   "license": "MIT"
 }
