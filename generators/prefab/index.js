@@ -57,11 +57,10 @@ module.exports = class extends Generator {
     });
   }
 
-  writing() {
-    const esDirName = `es${this.esVersion}`;
 
+  writing() {
     this.fs.copyTpl(
-      this.templatePath(path.join(esDirName, `${this.prefabType}.js`)),
+      this.templatePath(path.join('src', `${this.prefabType}.js`)),
       this.destinationPath(path.join('src', 'prefabs', `${this.prefabName}.js`)),
       this
     );

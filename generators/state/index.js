@@ -34,7 +34,6 @@ module.exports = class extends Generator {
   }
 
   writing() {
-    const esDirName = `es${this.esVersion}`;
 
     // Create a list of all files in the 'src/states' folder
     this.gameStates = fs.readdirSync('src/states/');
@@ -50,13 +49,13 @@ module.exports = class extends Generator {
 
     // Create the new state and rebuild 'main.js' with the new state
     this.fs.copyTpl(
-      this.templatePath(path.join(esDirName, 'state.js')),
+      this.templatePath(path.join('src', 'state.js')),
       this.destinationPath(path.join('src', 'states', `${this.stateName}.js`)),
       this
     );
 
     this.fs.copyTpl(
-      this.templatePath(path.join('..', '..', 'app', 'templates', esDirName, 'main.js')),
+      this.templatePath(path.join('..', '..', 'app', 'templates', 'src', 'main.js')),
       this.destinationPath('src', 'main.js'),
       this
     );
