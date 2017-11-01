@@ -11,7 +11,7 @@ class Boot extends Phaser.State {
   create() {
     this.game.input.maxPointers = 1;
     this.game.scale.pageAlignHorizontally = true;
-    //setup device scaling
+    // setup device scaling
     if (!this.game.device.desktop) {
       this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
       this.game.scale.minWidth =  480;
@@ -27,7 +27,7 @@ class Boot extends Phaser.State {
     this.game.state.start('preloader');
   }
 
-  initGlobalVariables(){
+  initGlobalVariables() {
     this.game.global = {
       score: 0
     };

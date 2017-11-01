@@ -46,21 +46,6 @@ module.exports = class extends Generator {
       },
       {
         type: 'list',
-        name: 'esVersion',
-        message: 'Which ECMAScript version do you want to use?',
-        choices: [
-          {
-            value: 6,
-            name: 'ECMAScript 6/2015 (Default)'
-          },
-          {
-            value: 5,
-            name: 'ECMAScript 5'
-          }
-        ]
-      },
-      {
-        type: 'list',
         name: 'outputFullGame',
         message: 'Output an example game or boilerplate code?',
         choices: [
@@ -78,21 +63,19 @@ module.exports = class extends Generator {
       this.projectName = answers.projectName ? answers.projectName : ' ';
       this.phaserBuild = answers.phaserBuild ? answers.phaserBuild : 'phaser.min.js';
       this.customBuild = !!(this.phaserBuild.indexOf("custom/") !== -1);
-      this.esVersion = answers.esVersion || 6;
       this.gameFolder = answers.outputFullGame ? 'game' : 'boilerplate';
-      this.esDirName = `es${this.esVersion}`;
     });
   }
 
   // save prompt answers to Yeoman config
   configuring() {
     this.config.set('projectName', this.projectName);
-    this.config.set('esVersion', this.esVersion);
+    // this.config.set('esVersion', this.esVersion);
     this.config.set('gameFolder', this.gameFolder);
   }
 
   writing() {
-    const gameSrcPath = path.join(this.esDirName, this.gameFolder);
+    const gameSrcPath = path.join('src', this.gameFolder);
     const assetDirPath = path.join('assets', this.gameFolder);
 
     this.fs.copy(
@@ -126,14 +109,14 @@ module.exports = class extends Generator {
     );
 
     this.fs.copyTpl(
-      this.templatePath(path.join(this.esDirName, '_package.json')),
+      this.templatePath(path.join('src', '_package.json')),
       this.destinationPath('package.json'),
       this
     );
 
     this.gameStates = ['boot', 'game', 'menu', 'preloader', 'gameover'];
     this.fs.copyTpl(
-      this.templatePath(path.join(this.esDirName, 'main.js')),
+      this.templatePath(path.join('src', 'main.js')),
       this.destinationPath(path.join('src', 'main.js')),
       this
     );
