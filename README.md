@@ -1,11 +1,11 @@
 generator-phaser
 =================
 
-A [Yeoman](http://yeoman.io/) generator to create HTML5 games with [phaser](http://phaser.io/). This generator allows for the creation of Phaser source code made with best practices. The main generator (`yo phaser`) outputs a basic game's structure or a full Phaser game (if you so choose in an ES6 project). You can also generate new prefabs (`yo phaser:prefab`) or states (`yo phaser:state`) to add to your project.
+A [Yeoman](http://yeoman.io/) generator to create HTML5 games with [Phaser](http://phaser.io/). This generator allows for the creation of Phaser games with best practices. The main generator (`yo phaser`) outputs a basic Phaser game. You can also generate new prefabs (`yo phaser:prefab`) or states (`yo phaser:state`) to add to your project.
 
-You can view your game in the browser by running `npm start` from your home directory and the web page will refresh as you save your files. It is recommended to view your game in Chrome, as it usually supports more features than FF or IE  (i.e. audio).
+You can view your game in the browser by running `npm start` from the project's root directory and the web page will refresh as you save your files.
 
-When you are ready to publish, build your game with `npm run build` and view the output in the `build/` folder. The build process minifies and compresses individual files into one file for faster network downloading, and if you're developing an ES6 game, it automatically outputs ES5 compatible code using [Babel](https://babeljs.io/).
+When you are ready to publish, build your game with `npm run build` and view the output in the `build/` folder. The build process minifies and compresses individual files into one file for faster network downloading, the source code is transpiled to ES5 compatible JavaScript using [Babel](https://babeljs.io/).
 
 **INSTRUCTIONS**
 
@@ -30,7 +30,7 @@ When you are ready to publish, build your game with `npm run build` and view the
 + Invoke the prefab generator:
 
   `yo phaser:prefab`
-  
+
 + Invoke the shader generator:
 
   `yo phaser:shader`
@@ -45,12 +45,13 @@ When you are ready to publish, build your game with `npm run build` and view the
 
 **Notes**
 
-The game's `main.js` file will be updated with new states when you run the state generator. It adds in .js files found in the 'src/states/' directory.
+The game's `main.js` file will be updated with new states when you run the state generator.
+It adds in .js files found in the `src/states/` directory.
 
 **CREDITS**
 
 + [@photonstorm](https://github.com/photonstorm/) for creating
-  [phaser](https://github.com/photonstorm/phaser).
+  [Phaser](https://github.com/photonstorm/phaser).
 
 + The guys behind [yeoman](https://github.com/yeoman/yeoman).
 
