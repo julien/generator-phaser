@@ -62,7 +62,7 @@ module.exports = class extends Generator {
     ]).then(answers => {
       this.projectName = answers.projectName ? answers.projectName : ' ';
       this.phaserBuild = answers.phaserBuild ? answers.phaserBuild : 'phaser.min.js';
-      this.customBuild = !!(this.phaserBuild.indexOf("custom/") !== -1);
+      this.customBuild = !!(this.phaserBuild.indexOf('custom/') !== -1);
       this.gameFolder = answers.outputFullGame ? 'game' : 'boilerplate';
     });
   }
@@ -70,7 +70,6 @@ module.exports = class extends Generator {
   // save prompt answers to Yeoman config
   configuring() {
     this.config.set('projectName', this.projectName);
-    // this.config.set('esVersion', this.esVersion);
     this.config.set('gameFolder', this.gameFolder);
   }
 
@@ -123,9 +122,8 @@ module.exports = class extends Generator {
   }
 
   install() {
-    if (this.options.skipInstall === true) {
+    if (this.options.skipInstall !== true)
       this.installDependencies({bower: false});
-    }
   }
 
 }

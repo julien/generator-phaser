@@ -7,7 +7,6 @@ module.exports = class extends Generator {
   initializing() {
     this.log('Creating a new Phaser Prefab.');
     this.projectName = this.config.get('projectName');
-    this.esVersion = this.config.get('esVersion');
   }
 
   prompting() {
@@ -60,7 +59,7 @@ module.exports = class extends Generator {
 
   writing() {
     this.fs.copyTpl(
-      this.templatePath(path.join('src', `${this.prefabType}.js`)),
+      this.templatePath(path.join(`${this.prefabType}.js`)),
       this.destinationPath(path.join('src', 'prefabs', `${this.prefabName}.js`)),
       this
     );

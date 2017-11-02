@@ -8,7 +8,6 @@ module.exports = class extends Generator {
   initializing() {
     this.log('Creating a new Phaser State.');
     this.projectName = this.config.get('projectName');
-    this.esVersion = this.config.get('esVersion');
   }
 
   prompting() {
@@ -49,7 +48,7 @@ module.exports = class extends Generator {
 
     // Create the new state and rebuild 'main.js' with the new state
     this.fs.copyTpl(
-      this.templatePath(path.join('src', 'state.js')),
+      this.templatePath(path.join('state.js')),
       this.destinationPath(path.join('src', 'states', `${this.stateName}.js`)),
       this
     );
