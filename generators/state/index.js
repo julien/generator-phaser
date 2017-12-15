@@ -1,39 +1,36 @@
 const Generator = require('yeoman-generator');
-const util = require('util');
 const fs = require('fs');
 const path = require('path');
 
 module.exports = class extends Generator {
-
   initializing() {
     this.log('Creating a new Phaser State.');
     this.projectName = this.config.get('projectName');
   }
 
   prompting() {
-
-    return this.prompt([{
-      type: 'input',
-      name: 'stateName',
-      message: 'What\'s the name of your new state?',
-      filter(input) {
-        return path.basename(input, '.js');
-      },
-      validate(input) {
-        if (input === '') {
-          return 'State name cannot be empty';
-        } else {
-          return true;
+    return this.prompt([
+      {
+        type: 'input',
+        name: 'stateName',
+        message: 'What\'s the name of your new state?',
+        filter(input) {
+          return path.basename(input, '.js');
+        },
+        validate(input) {
+          if (input === '') {
+            return 'State name cannot be empty';
+          } else {
+            return true;
+          }
         }
       }
-    }]).then(answers => {
-      console.log(answers);
+    ]).then(answers => {
       this.stateName = answers.stateName;
     });
   }
 
   writing() {
-
     // Create a list of all files in the 'src/states' folder
     this.gameStates = fs.readdirSync('src/states/');
 
@@ -59,6 +56,4 @@ module.exports = class extends Generator {
       this
     );
   }
-
-}
-
+};

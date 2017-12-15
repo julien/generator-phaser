@@ -1,12 +1,9 @@
 const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const path = require('path');
-const mkdirp = require('mkdirp');
-const util = require('util');
 const foldername = path.basename(process.cwd());
 
 module.exports = class extends Generator {
-
   initializing() {
     this.pkg = require('../../package.json');
   }
@@ -77,35 +74,15 @@ module.exports = class extends Generator {
     const gameSrcPath = path.join('src', this.gameFolder);
     const assetDirPath = path.join('assets', this.gameFolder);
 
-    this.fs.copy(
-      this.templatePath('gitignore'),
-      this.destinationPath('.gitignore'),
-      this
-    );
+    this.fs.copy(this.templatePath('gitignore'), this.destinationPath('.gitignore'), this);
 
-    this.fs.copyTpl(
-      this.templatePath('index.html'),
-      this.destinationPath('index.html'),
-      this
-    );
+    this.fs.copyTpl(this.templatePath('index.html'), this.destinationPath('index.html'), this);
 
-    this.fs.copy(
-      this.templatePath('css'),
-      this.destinationPath('css'),
-      this
-    );
+    this.fs.copy(this.templatePath('css'), this.destinationPath('css'), this);
 
-    this.fs.copy(
-      this.templatePath(assetDirPath),
-      this.destinationPath('assets'),
-      this
-    );
+    this.fs.copy(this.templatePath(assetDirPath), this.destinationPath('assets'), this);
 
-    this.fs.copy(
-      this.templatePath(gameSrcPath),
-      this.destinationPath('src'),
-      this
-    );
+    this.fs.copy(this.templatePath(gameSrcPath), this.destinationPath('src'), this);
 
     this.fs.copyTpl(
       this.templatePath(path.join('src', '_package.json')),
@@ -122,9 +99,6 @@ module.exports = class extends Generator {
   }
 
   install() {
-    if (this.options.skipInstall !== true)
-      this.installDependencies({bower: false});
+    if (this.options.skipInstall !== true) this.installDependencies({bower: false});
   }
-
-}
-
+};

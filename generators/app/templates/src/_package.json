@@ -11,13 +11,13 @@
     "build:html":  "htmlprocessor index.html -o build/index.html",
     "copy:all":    "npm run copy:assets && npm run copy:phaser",
     "copy:assets": "ncp assets build/assets/",
-    "copy:phaser": "ncp node_modules/phaser/build/phaser.min.js build/phaser.min.js"
+    "copy:phaser": "ncp node_modules/phaser-ce/build/phaser.min.js build/phaser.min.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "phaser": "^2.6.2"
+    "phaser-ce": "^2.9.3"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
