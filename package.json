@@ -19,7 +19,7 @@
     "format": "prettier generators/**/*.js test/**/*.js --write",
     "lint": "eslint generators/**/*.js test/**/*.js --fix",
     "precommit": "lint-staged && npm test",
-    "prepublish": "lint-staged && npm test"
+    "prepublishOnlyOnly": "lint-staged && npm test"
   },
   "lint-staged": {
     "*.js": ["npm run format", "npm run lint", "git add"]
