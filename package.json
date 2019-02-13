@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "chalk": "^2.3.0",
-    "yeoman-generator": "^2.0.1"
+    "yeoman-generator": "3.2.0"
   },
   "devDependencies": {
     "eslint": "^4.19.1",
