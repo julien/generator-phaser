@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "chalk": "^2.3.0",
-    "yeoman-generator": "3.2.0"
+    "yeoman-generator": "7.4.0"
   },
   "devDependencies": {
     "eslint": "5.13.0",
@@ -44,7 +44,7 @@
     "mocha": "^4.1.0",
     "prettier": "^1.11.1",
     "yeoman-assert": "^3.1.0",
-    "yeoman-test": "2.0.0"
+    "yeoman-test": "10.0.1"
   },
   "license": "MIT"
 }
